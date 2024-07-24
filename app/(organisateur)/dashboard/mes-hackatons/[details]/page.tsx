@@ -1,4 +1,4 @@
-import { HackathonDetails } from "@/components/dashboards/hackathonDetails";
+import { HackathonDetails } from "@/app/components/dashboards/hackathonDetails";
 
 export default function Page() {
 

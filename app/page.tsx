@@ -1,7 +1,7 @@
 'use client'
-import Hero from "@/components/home/hero";
-import { MobileNav } from "@/components/home/menuHamburger";
-import { NavBar } from "@/components/home/navBar";
+import Hero from "@/app/components/home/hero";
+import { MobileNav } from "@/app/components/home/menuHamburger";
+import { NavBar } from "@/app/components/home/navBar";
 import { useState } from "react";
 
 export default function Home() {
@@ -13,7 +13,7 @@ export default function Home() {
       <NavBar />
       {/* hamburger nav */}
       <div className="hidden max-md:block ">
-        <MobileNav />  
+        <MobileNav />
       </div>
       <Hero />
     </main>

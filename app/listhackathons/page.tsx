@@ -1,12 +1,12 @@
 "use client"
-import { ListItem } from "@/components/regular_list";
+import { ListItem } from "@/app/components/regular_list";
 import { hackathons } from "../utils/placeholder-data";
-import { HackathonCard } from "@/components/dashboards/hackthon-card";
+import { HackathonCard } from "@/app/components/dashboards/hackthon-card";
 import { useState } from "react";
 import { getHackathons } from "../utils/api/data";
 import { useQuery } from "@tanstack/react-query";
-import { Modal } from "@/components/modal";
-import { HackathonCardSkeleton } from "@/components/ui/skeletons";
+import { Modal } from "@/app/components/modal";
+import { HackathonCardSkeleton } from "@/app/components/ui/skeletons";
 import { useRouter } from "next/navigation";
 
 

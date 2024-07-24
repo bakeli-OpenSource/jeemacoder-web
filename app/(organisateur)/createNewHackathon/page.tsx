@@ -1,8 +1,8 @@
 "use client"
 import { Hackathon } from "@/app/utils/definitions";
-import { Avatar } from "@/components/avatar";
-import { Button } from "@/components/form/button";
-import FormInput from "@/components/form/input";
+import { Avatar } from "@/app/components/avatar";
+import { Button } from "@/app/components/form/button";
+import FormInput from "@/app/components/form/input";
 import { useMutation } from "@tanstack/react-query";
 import { ChangeEvent, useState } from "react";
 
@@ -60,7 +60,7 @@ export default function Page() {
                     <form onSubmit={onSubmit}
                         className="flex flex-col gap-5 pb-20">
                         <p className="mb-2 text-sm font-semibold"> Entrez le nom de votre Hackathons </p>
-                            <input type="file" accept=".jpg,.png,.svg" id="logo_url" onChange={(e : ChangeEvent<HTMLInputElement>) => {
+                            <input  placeholder="nom" type="file" accept=".jpg,.png,.svg" id="logo_url" onChange={(e : ChangeEvent<HTMLInputElement>) => {
                             if(e.target.files && e.target.files.length>0){setLogo_Url(e.target.files[0])}
                             }} />
                             <FormInput 
@@ -72,7 +72,7 @@ export default function Page() {
                             />
                         <div >
                             <p className="py-3"> Description : mettez une description detaillé de ce vas etre votre hackathon </p>
-                            <textarea id="description"
+                            <textarea placeholder="Description" id="description"
                                     value={description}
                                     onChange={(e : ChangeEvent<HTMLTextAreaElement>) => {setDescription(e.target.value)}}
                                     rows={3} className="w-full outline-none border rounded-lg p-3"/>
@@ -123,7 +123,7 @@ export default function Page() {
                             />
                             <div className="">
                                 <p>Theme</p>
-                                <select className="w-40 px-4 py-2 outline-none" value={theme}
+                                <select title="theme" className="w-40 px-4 py-2 outline-none" value={theme}
                                     onChange={(e : ChangeEvent<HTMLSelectElement>) => {setTheme(e.target.value)}}
                                     >
                                     <option value="orange">orange</option>
