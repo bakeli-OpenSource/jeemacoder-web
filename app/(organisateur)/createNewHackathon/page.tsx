@@ -1,8 +1,8 @@
 "use client"
 import { Hackathon } from "@/app/utils/definitions";
-import { Avatar } from "@/components/avatar";
-import { Button } from "@/components/form/button";
-import FormInput from "@/components/form/input";
+import { Avatar } from "@/app/components/avatar";
+import { Button } from "@/app/components/form/button";
+import FormInput from "@/app/components/form/input";
 import { useMutation } from "@tanstack/react-query";
 import { ChangeEvent, useState } from "react";
 

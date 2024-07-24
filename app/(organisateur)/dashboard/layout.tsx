@@ -1,6 +1,6 @@
-import { Container } from "@/components/container";
-import { SideBar } from "@/components/dashboards/sideBar";
-import { openSans, roboto } from "@/components/ui/fonts";
+import { Container } from "@/app/components/container";
+import { SideBar } from "@/app/components/dashboards/sideBar";
+import { openSans, roboto } from "@/app/components/ui/fonts";
 
 export default function Layout ({children} : {children : React.ReactNode}) {
 

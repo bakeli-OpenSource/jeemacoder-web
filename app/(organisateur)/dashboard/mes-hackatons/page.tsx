@@ -1,8 +1,8 @@
 "use client"
 import { getHackathons } from "@/app/utils/api/data";
-import { HackathonCard } from "@/components/dashboards/hackthon-card";
-import { ListItem } from "@/components/regular_list";
-import { HackathonCardSkeleton } from "@/components/ui/skeletons";
+import { HackathonCard } from "@/app/components/dashboards/hackthon-card";
+import { ListItem } from "@/app/components/regular_list";
+import { HackathonCardSkeleton } from "@/app/components/ui/skeletons";
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 

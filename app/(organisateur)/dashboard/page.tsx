@@ -1,15 +1,15 @@
 "use client"
 import { hackathons } from "@/app/utils/placeholder-data";
-import { Button } from "@/components/button";
-import { HackathonTable } from "@/components/dashboards/hackathonsTableList";
-import { SmallHackthonCard } from "@/components/dashboards/small-hackhton-card";
-import { Modal } from "@/components/modal";
-import { ListItem } from "@/components/regular_list";
+import { Button } from "@/app/components/button";
+import { HackathonTable } from "@/app/components/dashboards/hackathonsTableList";
+import { SmallHackthonCard } from "@/app/components/dashboards/small-hackhton-card";
+import { Modal } from "@/app/components/modal";
+import { ListItem } from "@/app/components/regular_list";
 import { PlusCircledIcon } from "@radix-ui/react-icons";
 import { useState } from "react";
 import { getHackathons } from "@/app/utils/api/data";
 import { useQuery } from "@tanstack/react-query";
-import { SmallHackathonCardSkelethon } from "@/components/ui/skeletons";
+import { SmallHackathonCardSkelethon } from "@/app/components/ui/skeletons";
 
 export default function Page () {
     const [showModal , setShowModal] = useState(false)
