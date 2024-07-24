@@ -29,6 +29,7 @@ export default function FormInput({id , type = "text", value, placeholder, class
               value={value} 
               onChange={onChange}
               placeholder={placeholder}
+              data-date-format="YYYY-MM-DD"
               readOnly={readOnly}
               className={clsx('w-full placeholder:text-[#636364] focus:border-light-green outline-none px-6 py-3 rounded-md bg-muted text-xs border max-sm:px-2 max-sm:py-2 max-sm:placeholder:text-xs'
             , className)} />
@@ -36,3 +37,4 @@ export default function FormInput({id , type = "text", value, placeholder, class
     </div>
   )
 }
+

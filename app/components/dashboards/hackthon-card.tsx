@@ -14,7 +14,9 @@ import { DetailsButton } from "./detailsButton"
     description : string ,
     status : "passe" | "encour" | "arriving" ,
     participants : number ,
-    id : string }, 
+    id : string 
+    prix : string
+}, 
     onClick : () => void
 }) => {
     const [showDetails , setShowDetails] = useState<boolean>(false)
@@ -22,7 +24,7 @@ import { DetailsButton } from "./detailsButton"
     
 
     const {logo_url , date_debut , name , structure_organisateur , description , 
-            status , participants , id } = hackathons
+            status , participants , id  , prix} = hackathons
     return (
         <DetailsButton id={id}>
         <div onClick={onClick}
@@ -43,7 +45,7 @@ import { DetailsButton } from "./detailsButton"
                 </div>
             </div>
             <div>
-                <p className="px-4 font-semibold">{description} </p>
+                <p className="px-4 font-semibold">{prix} </p> 
             </div>
             <div  className="flex justify-between">
                 <div className="flex gap-4">

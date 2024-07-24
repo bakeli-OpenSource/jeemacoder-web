@@ -15,11 +15,12 @@ export const HackathonDetails = () => {
     }); 
 
     const [value , setValue] = useState<Hackathon>({
-        name : '', date_debut : '' , 
+        name : '', date_debut : '2024-08-03' , 
         date_fin : '' , lieu : '', prix : '',
         structure_organisateur : ''
     })
-
+    console.log(value.date_debut);
+    
     return (
        <div className="flex gap-10 justify-center">
         <form className="flex flex-col gap-6 ">
