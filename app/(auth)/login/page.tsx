@@ -22,26 +22,28 @@ export default function Page() {
     const input = e.currentTarget;
     setValue({...value , [input.id] : input.value})
   }
-  const handleSubmit = (e : ChangeEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e : ChangeEvent<HTMLFormElement>) => {
     e.preventDefault()
-    const input = e.currentTarget;
-    setValue({...value , [input.id] : input.value})
 
-    const formData = new FormData();
-    formData.append('email' , value.email)
-    formData.append('password' , value.password)
-    
-    // for(let [key , value] of formData.entries()) {
-    // console.log(`${key} : ${value}`);}
+    const formData = {
+      email: value.email,
+      password: value.password,
+    };
 
-    axios.post('http://localhost:8000/api/login' , formData , 
-      {
-        headers : {
-          "Content-Type" : "application/json" ,
-          }
+    try {
+      const res = await axios.post('http://localhost:8000/api/login', formData, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      
+      if (res.data.token) {
+        localStorage.setItem('authToken', res.data.token);
+        console.log("success! you are connected", res.data);
       }
-    ).then(res => console.log("success ! you are connected" , res)
-    ).catch(res => console.log('echec ! connexion echoué'))
+    } catch (error) {
+      console.log('echec! connexion échouée', error);
+    }
   }
 
 

@@ -1,13 +1,13 @@
 import { useMutation } from "@tanstack/react-query"
 import { ChangeEvent } from "react"
-
+const authToken = localStorage.getItem('authToken');
 export const getHackathons = async () => {
     const getData = async () => {
             const options = {
-                method : "GET" , 
+                method : "GET" ,
                 headers : {
                     "accept" : "application/json",
-                    "Authorization" : "Bearer 10|Wrb98ax7fDNTbAErH6AaZZutOdZaUu6W46UsUJNxf30deaaf"
+                    "Authorization" : `Bearer ${authToken}`
                 }
             }
         const response = fetch('http://localhost:8000/api/hackathons' , options)
