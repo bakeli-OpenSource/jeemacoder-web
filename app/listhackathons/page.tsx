@@ -31,7 +31,7 @@ export default function Page() {
           {
             isLoading ? <HackathonCardSkeleton /> : 
             <ListItem 
-                items={data || []}
+                items={hackathons}
                 resourcename="hackathons"
                 component={HackathonCard}
                 className=""
@@ -41,14 +41,12 @@ export default function Page() {
             />
           }
           {isError && <div> fetching data failed </div> }
-            
         </div>
-
         <Modal showModal={showDetails} onClose={() => setShowDetails(!showDetails)} >
-            <div className="max-w-3xl bg-light-green m-auto rounded-md p-5">
+            <div className="max-w-3xl bg-muted m-auto rounded-md p-5">
                 <div className="flex gap-5">
                 <div  className="flex gap-3 ">
-                    <div className="w-32 h-32 bg-white rounded-md"></div>
+                    <div className="w-28 h-28 bg-white rounded-md"></div>
                     <div>
                         <h1 className="text-2xl"> Jeemacoder 2024 </h1>
                         <p className="border rounded-lg bg-muted inline-block px-4 m-1"> tag 1 </p>
@@ -63,11 +61,13 @@ export default function Page() {
                 </div>
                 </div>
                 <div className="py-5 text-white">
+                    <p className="">Description</p>
                     <span>salut a tout le monde salut a tout le monde salut a tout le monde sal </span>
                     <span>salut a tout le monde salut a tout le monde salut a tout le monde salut a tout le </span>
                     <span>salut a tout le monde salut a tout le monde salut a tout le monde salut a tout le </span>
                     <span>salut a tout le monde salut a tout le monde salut a tout le monde salut a tout le </span>
                 </div>
+
             </div>
         </Modal>
     </div> )
