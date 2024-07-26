@@ -1,4 +1,7 @@
-const authToken = localStorage.getItem('authToken');
+let authToken: string | null = null;
+if (typeof window !== "undefined") {
+    authToken = localStorage.getItem('authToken');
+  }
 export const getUser = async () => {
     const getData = async () => {
             const options = {
