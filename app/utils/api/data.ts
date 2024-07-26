@@ -1,6 +1,9 @@
 import { useMutation } from "@tanstack/react-query"
 import { ChangeEvent } from "react"
-const authToken = localStorage.getItem('authToken');
+let authToken: string | null = null;
+if (typeof window !== "undefined") {
+    authToken = localStorage.getItem('authToken');
+  }
 export const getHackathons = async () => {
     const getData = async () => {
             const options = {
