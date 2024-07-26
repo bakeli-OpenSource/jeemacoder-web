@@ -32,7 +32,7 @@ export const HackathonDetails = () => {
     if (isError) return <div>Error loading hackathons</div>;
 
     return (
-        <div className="max-w-4xl mx-auto p-8 bg-white shadow-lg rounded-lg overflow-hidden">
+        <div className="p-8 bg-white shadow-lg rounded-lg">
             <form className="w-full space-y-6">
                 <div className="flex items-center gap-5">
                     <div className="w-24 h-24 relative rounded-lg overflow-hidden">
@@ -169,7 +169,7 @@ export const HackathonDetails = () => {
                         </select>
                     </div>
                 </div>
-                <Button className="mt-4">Modifier</Button>
+                <Button className="mt-4 bg-orange-400">Modifier</Button>
             </form>
         </div>
     )
