@@ -16,7 +16,7 @@ export const Button = ({className ,
     ...props} : ButtonProps) => {
   
     return types === "button" ? (
-    <button className={clsx( "text-sm font-normal px-4",
+    <button className={clsx(
     {
         "border rounded-md" : variant === "default",
         "m-auto border rounded-full" : variant === "rounded",

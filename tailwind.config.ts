@@ -15,7 +15,7 @@ const config: Config = {
             "base-blue" : "#15548E",
             "blue-muted" : "#D8E8F6",
             "dark-blue" : "rgb(2,6,23)",
-            "white" : "#FFFFFE",
+            "white" : "#FFFFFF",
             "black" : "#141111",
             "gray-foreground" : "#D9D9D9",
             "muted" : "#F5F5F5",
