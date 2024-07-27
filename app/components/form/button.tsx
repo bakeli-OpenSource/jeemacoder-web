@@ -11,9 +11,9 @@ export const Button = ({className ,
     ...props} : ButtonProps) => {
   
     return (
-    <button className={clsx(
+    <button  className={clsx(
     {
-        "m-auto rounded-md py-2 w-full bg-dark text-white text-sm hover:bg-dark-green-hover" : variant === "default",
+        "m-auto rounded-md py-2 w-full bg-dark text-white text-sm" : variant === "default",
         "" : variant === "rounded"
     } , className)} 
     {...props}
