@@ -2,9 +2,8 @@ import { LinkData } from "./definitions";
 
 export const linkData:LinkData[] = [
   {href : '/' , link : 'acceuil' },
-  {href : '' , link : 'service' },
+  {href : '/listhackathons' , link : 'hackathons' },
   {href : '' , link : 'FAQ' },
-  {href : '/dashboard' , link : 'dashboard'}
 
 ]
 

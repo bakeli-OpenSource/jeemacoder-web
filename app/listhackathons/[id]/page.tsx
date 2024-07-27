@@ -6,10 +6,10 @@ import { Globe } from "lucide-react";
 export default function Details({params} : {params : any}) {
     return (
         <div>
-            <div className="border">
+            <div className=" bg-dark-blue ">
                 <NavBar />
             </div>
-            <div className="max-w-5xl m-auto">
+            <div className="max-w-5xl m-auto my-10">
                 <div className="flex gap-10">
                     <div className=" p-4 flex flex-col gap-5">
                             <div className="flex gap-10">

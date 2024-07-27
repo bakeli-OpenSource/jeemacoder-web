@@ -1,9 +1,9 @@
-import { Calendar, DoorClosed, Globe, MapPinIcon, SmilePlus, TagsIcon } from "lucide-react"
+import { BanknoteIcon, Calendar, DoorClosed, Globe, MapPinIcon, SmilePlus, TagsIcon } from "lucide-react"
 
 export const HackDetailsCard = () => {
     
     return (
-        <div className="flex flex-col gap-10">
+        <div className="flex flex-col gap-10 rounded-md my-5">
             <div className="flex items-center gap-3"> 
                 <DoorClosed className="stroke-1"/>
                 <p> Date limite des inscription : 2024-10-17 </p>
@@ -12,7 +12,7 @@ export const HackDetailsCard = () => {
                 <DetailsCardItem icon={Globe} text="Presentielle"/>
                 <DetailsCardItem icon={MapPinIcon} text="HLM GR Yoff "/>
                 <DetailsCardItem icon={ SmilePlus } text="inscription en cours"/>
-                <DetailsCardItem icon={Globe} text="Prix"/>
+                <DetailsCardItem icon={BanknoteIcon} text="Prix"/>
             </div>
             <div className="flex flex-col gap-5">
                 <DetailsCardItem icon={Calendar} text=" Demarrage: " amount="2024-03-04" />

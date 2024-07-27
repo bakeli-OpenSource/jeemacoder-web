@@ -15,8 +15,8 @@ export const NavLinks = ({links} : {
 
     return (
             <Link href={href} 
-                className={clsx("px-5 flex w-full py-1 gap-5 items-center" ,
-                    {"bg-white rounded-md font-semibold" : pathName == href})}>
+                className={clsx("px-5 flex w-full py-1 gap-5 items-center " ,
+                    {"bg-white rounded-md font-semibold text-dark" : pathName == href})}>
                     {Icone ? <Icone /> : null}
                         {link}
                     </Link>)
