@@ -6,7 +6,7 @@ export const Modal = ({showModal , onClose , children} : {
     }) => {
 
     return showModal ? (
-        <div className='absolute z-10 w-full h-screen flex justify-center items-center overflow-auto bg-white left-0 right-0 top-0' 
+        <div className='absolute z-10 w-full h-screen flex justify-center items-center overflow-auto bg-muted left-0 right-0 top-0' 
             onClick={onClose}
         >
             <div className='' 

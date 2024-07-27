@@ -10,7 +10,7 @@ function Hero() {
       Vos hackathons <br /> en <span className="text-dark-blue ">mieux</span>
     </h1>
     <p className="max-w-2xl text-center p-5 text-md m-auto max-sm:text-xl">
-      la meilleure plateforme d&apos;organisation et de gestion d&apos;hackaton dans le monde.
+      la meilleure plateforme d&apos;organisation et de gestion d&apos;hackaton dans le monde de demain.
     </p>
   </div>
 

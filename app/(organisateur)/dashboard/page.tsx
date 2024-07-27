@@ -17,7 +17,7 @@ export default function Page () {
         queryFn : async () => await getHackathons(),
         queryKey : ['hackathons'],
     })
-    console.log("data : ",data);
+    console.log(data);
     
     return (<div className="min-w-full h-full overflow-y-auto rounded-lg border-muted-foreground bg-white max-sm:border-none">
         <div className="w-full h-5 px-5 py-8 flex justify-between items-center max-sm:flex-col max-sm:py-1 max-md:px-1">

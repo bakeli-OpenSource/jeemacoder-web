@@ -24,10 +24,7 @@ export const Profil = () => {
     </div>
         {isLoading ?
         <div>user empty</div> :
-        <Avatar 
-            profil={data || []} 
-            variante="small" 
-            className="gap-1"/> 
+        <Avatar profil={data} variante="small" className="gap-1"/> 
         }
     </div>
 }

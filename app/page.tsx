@@ -13,7 +13,7 @@ export default function Home() {
       <NavBar />
       {/* hamburger nav */}
       <div className="hidden max-md:block ">
-        <MobileNav />
+        <MobileNav />  
       </div>
       <Hero />
     </main>
