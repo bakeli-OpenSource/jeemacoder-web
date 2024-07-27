@@ -1,8 +1,8 @@
-"use client"
+"use client";
 import { useState } from "react";
 import { HackathonDetails } from "@/app/components/dashboards/hackathonDetails";
 import { EnrolementParticipants } from "@/app/components/dashboards/enrolementParticipants";
-
+import { GestionParticipants } from "@/app/components/dashboards/gestionParticipants"; // Add this import
 
 export default function Page() {
     const [activeTab, setActiveTab] = useState("details");
@@ -26,9 +26,17 @@ export default function Page() {
                 >
                     Enrolement
                 </button>
+                <button
+                    className={`py-2 px-4 rounded ${activeTab === "participant" ? "bg-orange-400 text-white" : "bg-gray-200 text-gray-700"}`}
+                    onClick={() => setActiveTab("participant")}
+                >
+                    Participant
+                </button>
             </div>
             <div className="p-5">
-                {activeTab === "details" ? <HackathonDetails /> : <EnrolementParticipants />}
+                {activeTab === "details" && <HackathonDetails />}
+                {activeTab === "enrolment" && <EnrolementParticipants />}
+                {activeTab === "participant" && <GestionParticipants />} {/* Add this line */}
             </div>
         </div>
     );
