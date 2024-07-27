@@ -2,8 +2,10 @@
 import { Button } from "@/app/components/form/button";
 import FormInput from "@/app/components/form/input";
 import axios from "axios";
+import { Undo2 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { ChangeEvent, useState } from "react";
 
 type Value = {
@@ -22,6 +24,8 @@ export default function Page() {
     const input = e.currentTarget;
     setValue({...value , [input.id] : input.value})
   }
+  const router = useRouter()
+  const onClick = () => router.replace('/dashboard')
   const handleSubmit = async (e : ChangeEvent<HTMLFormElement>) => {
     e.preventDefault()
 
@@ -47,8 +51,11 @@ export default function Page() {
   }
 
 
-  return (
-    <div className="h-screen flex justify-center items-center max-w-4xl m-auto">
+  return (<div className="h-screen p-10">
+      <Link href="/user_role" className="border flex items-center gap-2 max-w-32 py-1 rounded-md justify-center" >
+          <Undo2 className="stroke-1 size-3"/> <span>Retour</span>
+      </Link>
+    <div className="flex justify-center items-center max-w-4xl m-auto">
         <div className=" m-auto flex flex-col gap-20 justify-center items-center py-10 px-20 rounded-md">
           <form className="w-[420px]" onSubmit={handleSubmit}>
           <h1 className="my-5 text-lg"> Connectez-vous </h1>
@@ -71,10 +78,10 @@ export default function Page() {
                     onChange={handleChange}
                     className=""
                     label="Password"
-                  />
+                    />
                   
     </div>
-    <Button > s&apos;inscrire</Button>
+    <Button onClick={onClick}> Se connecter </Button>
      <div className="flex flex-col">
           <div>
           vous avez déjà un compte ?
@@ -93,6 +100,7 @@ export default function Page() {
   <div className="w-full md:w-1/2 mt-4 md:mt-0">
           <Image src="/illustration-login.jpg" alt="" className="w-full" width={200} height={200}/>
         </div>
+  </div>
   </div>
   );
 }
