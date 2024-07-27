@@ -17,9 +17,8 @@ export default function Page() {
         queryKey : ["hackathons"],
     }); 
     const router = useRouter()
-    const [showDetails , setShowDetails] = useState<boolean>(false)
-    const onClose = () => {
-        setShowDetails(!showDetails)
+    const onClick = () => {
+        router.push('/listhackathons/1')
     }
         
     return (<div className="max-w-4xl m-auto py-12 flex flex-col gap-10">
@@ -34,41 +33,12 @@ export default function Page() {
                 items={data || []}
                 resourcename="hackathons"
                 component={HackathonCard}
-                className=""
-                onClick={()=> { setShowDetails(!showDetails) } }
-                withPopup={true}
+                className="flex flex-col gap-3 "
+                onClick={onClick}
                 href="listhackathons"
             />
           }
           {isError && <div> fetching data failed </div> }
-            
         </div>
-
-        <Modal showModal={showDetails} onClose={() => setShowDetails(!showDetails)} >
-            <div className="max-w-3xl bg-light-green m-auto rounded-md p-5">
-                <div className="flex gap-5">
-                <div  className="flex gap-3 ">
-                    <div className="w-32 h-32 bg-white rounded-md"></div>
-                    <div>
-                        <h1 className="text-2xl"> Jeemacoder 2024 </h1>
-                        <p className="border rounded-lg bg-muted inline-block px-4 m-1"> tag 1 </p>
-                        <p className="border rounded-lg bg-muted inline-block px-4 m-1"> tag 1 </p>
-                        <p className="border rounded-lg bg-muted inline-block px-4 m-1"> tag 3 </p>
-                    </div>
-                </div>
-                <div className="max-w-xl border p-2 rounded-md">
-                    <p>Bakeli school of technologie</p>
-                    <p> 2026-01-17 </p>
-                    <p> 2026-01-17 </p>
-                </div>
-                </div>
-                <div className="py-5 text-white">
-                    <span>salut a tout le monde salut a tout le monde salut a tout le monde sal </span>
-                    <span>salut a tout le monde salut a tout le monde salut a tout le monde salut a tout le </span>
-                    <span>salut a tout le monde salut a tout le monde salut a tout le monde salut a tout le </span>
-                    <span>salut a tout le monde salut a tout le monde salut a tout le monde salut a tout le </span>
-                </div>
-            </div>
-        </Modal>
     </div> )
 }

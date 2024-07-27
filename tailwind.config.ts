@@ -15,7 +15,7 @@ const config: Config = {
             "base-blue" : "#15548E",
             "blue-muted" : "#D8E8F6",
             "dark-blue" : "rgb(2,6,23)",
-            "white" : "#FFFFFF",
+            "white" : "#FFFFFE",
             "black" : "#141111",
             "gray-foreground" : "#D9D9D9",
             "muted" : "#F5F5F5",
@@ -26,7 +26,11 @@ const config: Config = {
             "dark-green" : "#0F4424",
             "dark-green-hover" : "#18793F",
             "light-orange" : "rgba(237, 159, 87, 0.07)",
-            "dark" : "#2A0003"
+            // BASE COLOR QUE L'ON VAS USRT
+            // orange == "light-orange"
+            // green = #579B6F
+            "dark" : "#1e2843"
+
       },
     },
   },

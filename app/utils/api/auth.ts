@@ -1,10 +1,14 @@
+let authToken: string | null = null;
+if (typeof window !== "undefined") {
+    authToken = localStorage.getItem('authToken');
+  }
 export const getUser = async () => {
     const getData = async () => {
             const options = {
-                method : "GET" , 
+                method : "GET" ,
                 headers : {
                     "accept" : "application/json",
-                    "Authorization" : "Bearer 11|dARsdS5U7el9s2nSI8miM5nwg1lrDneIi15Z7CH879b0175b"
+                   "Authorization" : `Bearer ${authToken}`
                 }
             }
         const response = fetch('http://localhost:8000/api/user' , options)

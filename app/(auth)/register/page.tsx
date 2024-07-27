@@ -70,7 +70,7 @@ const handleSubmit = (e : ChangeEvent<HTMLFormElement> ) => {
     }
   }).then(res => console.log( "success !! , you'r subscribed" , res))
     .catch(res => console.log(res))
-    
+
 }
   return (
     <div className="h-screen flex justify-center items-center max-w-4xl m-auto max-sm:flex-col">
@@ -160,8 +160,8 @@ const handleSubmit = (e : ChangeEvent<HTMLFormElement> ) => {
   </div>
   <div className="w-full md:w-1/2 mt-4 md:mt-0">
     {
-      role === "organisateur" ? 
-      <div>Inscrivez vous en tant que {role} </div> : 
+      role === "organisateur" ?
+      <div>Inscrivez vous en tant que {role} </div> :
       <div> inscrivez vous en tanque {role} </div>
     }
     
