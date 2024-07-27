@@ -8,6 +8,7 @@ import { useQuery } from "@tanstack/react-query";
 import { Modal } from "@/app/components/modal";
 import { HackathonCardSkeleton } from "@/app/components/ui/skeletons";
 import { useRouter } from "next/navigation";
+import { NavBar } from "../components/home/navBar";
 
 
 export default function Page() {
@@ -21,7 +22,11 @@ export default function Page() {
         router.push('/listhackathons/1')
     }
         
-    return (<div className="max-w-4xl m-auto py-12 flex flex-col gap-10">
+    return ( <div>
+        <div className="bg-dark top-0 sticky z-10">
+            <NavBar />
+        </div>
+    <div className="max-w-4xl m-auto py-12 flex flex-col gap-10">
         <div>
             <input type="text" placeholder="Rechercher"
             className="border outline-none w-80 px-4 py-2 rounded-md" />
@@ -36,9 +41,10 @@ export default function Page() {
                 className="flex flex-col gap-3 "
                 onClick={onClick}
                 href="listhackathons"
-            />
-          }
+                />
+            }
           {isError && <div> fetching data failed </div> }
         </div>
+    </div>
     </div> )
 }

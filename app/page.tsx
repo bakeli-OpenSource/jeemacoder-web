@@ -9,9 +9,9 @@ export default function Home() {
 
   return (
     <main className="font-mono bg-gradient-radial-home h-screen">
-      {/* nav bar */}
+      <div className="sticky top-0">
       <NavBar />
-      {/* hamburger nav */}
+      </div>
       <div className="hidden max-md:block ">
         <MobileNav />
       </div>

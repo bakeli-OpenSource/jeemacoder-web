@@ -22,12 +22,12 @@ export const NavBar = () => {
           items={linkData}
           resourcename="links"
           component={NavLinks}
-          className="flex"
+          className="flex text-white"
         />
       </div>
       <div className="flex gap-5">
-        <Link href="/listhackathons" className="font-semibold text-white border px-4 rounded-md py-1">
-          Rejoindre un hackaton
+        <Link href="/dashboard" className="font-semibold text-white bg-[#f47e11] px-4 rounded-md py-1">
+          Dashboard
         </Link>
       </div>
     </nav>
