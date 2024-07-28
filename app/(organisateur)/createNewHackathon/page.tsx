@@ -10,6 +10,7 @@ import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { Undo2, Upload } from "lucide-react";
 import Link from "next/link";
+import { Modal, YesOrNoModal } from "@/app/components/modal";
 let authToken: string | null = null;
 if (typeof window !== "undefined") {
     authToken = localStorage.getItem('authToken');
@@ -69,14 +70,18 @@ export default function Page() {
             //  for(let [key , value] of formData.entries()) {
             // console.log(`${key} : ${value}`);}
     }
-    // console.log(url);
+    const [showModal , setShowModal] = useState<boolean>(false)
+    const onCloseModal = () => {
+        setShowModal(!showModal)
+    }
+
     return (
         <div className="">
             <div className="max-w-4xl m-auto my-1 p-10 bg-light-orange rounded-md">
-               <div className="rounded-md">
-                    <Link href="/dashboard" className="border flex items-center gap-2 max-w-32 py-1 rounded-md justify-center" >
+               <div className="">
+                    <div onClick={onCloseModal} className="border cursor-pointer flex items-center gap-2 max-w-32 py-1 rounded-md justify-center" >
                         <Undo2 className="stroke-1 size-3"/> <span>Retour</span>
-                    </Link>
+                    </div>
                     <p className="font-semibold py-5 text-lg text-dark ">Commencez a creer votre hackathon</p>
                     <form onSubmit={onSubmit}
                         className="flex flex-col gap-5 pb-20 ">
@@ -200,7 +205,11 @@ export default function Page() {
                <div>
 
                </div>
-            </div>            
+            </div>           
+            
+            <Modal onClose={onCloseModal} showModal={showModal} className="pt-10">
+                <YesOrNoModal onClose={onCloseModal} href="/dashboard" />
+            </Modal>
         </div>
     )
 }
