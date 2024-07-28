@@ -18,13 +18,10 @@ export default function Page() {
         queryKey : ["hackathons"],
     }); 
     const router = useRouter()
-    const onClick = () => {
-        router.push('/listhackathons/1')
-    }
-        
+    
     return ( <div>
-        <div className="bg-dark top-0 sticky z-10">
-            <NavBar />
+        <div className="bg-dark z-10 sticky top-0">
+        <NavBar />
         </div>
     <div className="max-w-4xl m-auto py-12 flex flex-col gap-10">
         <div>
@@ -39,8 +36,6 @@ export default function Page() {
                 resourcename="hackathons"
                 component={HackathonCard}
                 className="flex flex-col gap-3 "
-                onClick={onClick}
-                href="listhackathons"
                 />
             }
           {isError && <div> fetching data failed </div> }

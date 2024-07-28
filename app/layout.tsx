@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import ReactQueryProvider from "@/app/components/home/routeLayout";
 import { roboto } from "@/app/components/ui/fonts";
+import { NavBar } from "./components/home/navBar";
 
 export const metadata: Metadata = {
   title: "jemacoder ",

@@ -1,10 +1,10 @@
 "use client"
 import { getHackathons } from "@/app/utils/api/data";
-import { HackathonCard } from "@/app/components/dashboards/hackthon-card";
 import { ListItem } from "@/app/components/regular_list";
-import { HackathonCardSkeleton } from "@/app/components/ui/skeletons";
+import { SmallHackathonCardSkelethon } from "@/app/components/ui/skeletons";
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
+import { SmallHackthonCard } from "@/app/components/dashboards/small-hackhton-card";
 
 export default function Page () {
     const {data , isLoading , isError} = useQuery({
@@ -21,20 +21,20 @@ export default function Page () {
             </div>
         </div>
         <div className="max-w-4xl m-auto py-12 flex flex-col gap-10 ">
-            {/* <div>
+            <div>
           {
-            isLoading ? <HackathonCardSkeleton /> : 
+            isLoading ? <SmallHackathonCardSkelethon /> : 
             <ListItem 
                 items={data.slice(1 , 2) || []}
                 resourcename="hackathons"
-                component={HackathonCard}
+                component={SmallHackthonCard}
                 className=""
                 onClick={() => setShowDetails(!showDetails) }
             />
           }
           {isError && <div> fetching data failed </div> }
             
-        </div> */}
+        </div>
         </div>
     </div>)
 }

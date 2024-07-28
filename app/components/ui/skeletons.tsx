@@ -24,19 +24,21 @@ export const HackathonCardSkeleton = () => {
 
 export const SmallHackathonCardSkelethon = () => {
 
-    return (
-        <div className="border p-5 bg-gray-50 rounded-xl animate-pulse">
-            <div className="flex gap-5">
-                <div className="size-20 border bg-gray-200 rounded-lg"></div>
-                <div className="flex flex-col gap-3">
-                    <div className="w-64 border rounded-xl h-3 bg-gray-200 "></div>
-                    <div className="w-64 border rounded-xl h-6 bg-gray-200 "></div>
-                </div>
-            </div>
-            <div className="flex justify-between pt-1 items-center">
-                <div className="w-10 border bg-gray-200 rounded-lg h-3"></div>
-                <div className="w-32 border bg-gray-200 rounded-lg h-5"></div>
+    return ( <div className="flex gap-4 max-w-sm">
+       {data.slice(0 , 2).map((d , i) => (
+        <div key={i} className="border p-5 bg-gray-50 rounded-xl animate-pulse">
+        <div className="flex gap-5 flex-col">
+            <div className="size-20 border bg-gray-200 rounded-lg"></div>
+            <div className="flex flex-col gap-3">
+                <div className="w-64 border rounded-xl h-3 bg-gray-200 "></div>
+                <div className="w-64 border rounded-xl h-6 bg-gray-200 "></div>
             </div>
         </div>
-    )
+        <div className="flex justify-between pt-1 items-center">
+            <div className="w-10 border bg-gray-200 rounded-lg h-3"></div>
+            <div className="w-32 border bg-gray-200 rounded-lg h-5"></div>
+        </div>
+    </div>
+       ))}
+ </div>)
 }
