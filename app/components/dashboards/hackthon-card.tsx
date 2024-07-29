@@ -27,36 +27,44 @@ import { useRouter } from "next/navigation"
 
     const {logo_url , date_debut , name , structure_organisateur , 
             status , participants , prix , theme , id} = hackathons
-            
+
     const router = useRouter()
     return (
         <div onClick={() => router.push(`listhackathons/details/${id}`)}
-            className={clsx(" max-w-4xl rounded-md p-7 flex flex-col gap-7 cursor-pointer" , {
-                " border border-[#F47E11]" : theme == "vert" , 
-                "border border-dark" : theme == "neutre",
-                "" : theme == "orange"
+            className={clsx(" max-w-3xl rounded-md p-7 flex flex-col gap-7 cursor-pointer border-2" , {
+                " border-light-green" : theme == "vert" , 
+                "border-dark" : theme == "neutre",
+                "border-orange " : theme == "orange"
             })}>
-            <div className="flex gap-10">
+            <div className="flex gap-10 ">
                 <div className="flex flex-col gap-5">
-                <Image src={`/${logo_url}`}
+                <Image src={`/hotelPic.jpg`}
                     width={130} 
                     height={100} 
                     alt="hack logo" 
                     className="border rounded-md"/>
-                <div className="flex items-center gap-4">
+                <div className="gap-4">
                     <div> <ImgCollpsed /> </div>
                     <div className="font-semibold text-sm">+{100}participants</div>
                 </div>
                 </div>
                 <div className="flex flex-col gap-2">
                     <DetailsCardItem icon={Calendar} text={date_debut} />
-                    <h1 className="text-2xl">{name} </h1>
-                    <h1> {status} </h1>
-                    <h2 className="text-md font-light ">organisateur : {structure_organisateur} </h2>
+                    <h1 className={clsx('text-2xl' , {
+                        "text-dark-green-hover" : theme == "vert",
+                        "text-orange" : theme == "orange",
+                        "text-dark" : theme == "neutre",
+
+                    })}>{name} </h1>
+                    
+                    <h2 className={clsx("text-md font-light" , {
+                        "text-dark-green-hover" : theme == "vert",
+                        "text-orange" : theme == "orange",
+                    })} > {structure_organisateur} </h2>
                 </div>
                 <div className=" flex flex-col gap-4">
-                    <DetailsCardItem icon={BanknoteIcon} text="Prix" amount={prix} />
-                    <DetailsCardItem icon={ SmilePlus } text="inscription en cours"/>
+                    <DetailsCardItem icon={BanknoteIcon} text="Prix" amount={prix} theme={theme}/>
+                    <DetailsCardItem icon={ SmilePlus } text={status} />
                     <div>
                         <TagsIcon className="stroke-1"/>
                         <div className="grid grid-cols-2 gap-2">
@@ -73,14 +81,14 @@ import { useRouter } from "next/navigation"
     )
 }
 
-const DetailsCardItem = ({icon : Icon , text , amount , className } : {
-    icon : React.ElementType , text ?: string , amount ?: string | number, className ?: string
+const DetailsCardItem = ({icon : Icon , text , amount , className , theme } : {
+    icon : React.ElementType , text ?: string , amount ?: string | number, className ?: string , theme ?: string
 }) => {
     return (
     <div className={`flex gap-4 ${className}`} >
-        {Icon ? <Icon className="stroke-1  " />  : null}
+        {Icon ? <Icon className="stroke-1 " />  : null}
         <span>{text} </span>
-        <span className="font-semibold"> {amount} </span>
+        <span className={clsx('font-semibold')}> {amount} </span>
     </div>
      )
 }
@@ -89,8 +97,9 @@ const DetailsCardItem = ({icon : Icon , text , amount , className } : {
 export const TagElement = ({text , theme} : {text : string ,  theme : string}) => {
     return (
         <span className={clsx(" rounded-full px-4 py-1 text-xs text-dark flex-item-center" , {
-            "bg-light-orange" : theme == "vert",
-            "bg-light-green" : theme == "neutre"
+            "bg-light-orange" : theme == "orange",
+            "bg-light-green" : theme == "vert" ,
+            "bg-muted" : theme === "neutre"
         })}>{text}</span>
     )
 }

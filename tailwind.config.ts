@@ -24,10 +24,10 @@ const config: Config = {
             // 
             "light-green" : "rgba(98, 217, 56, 0.54)",
             "dark-green" : "#0F4424",
-            "dark-green-hover" : "#18793F",
+            "dark-green-hover" : "#00AB44",
             "light-orange" : "rgba(237, 159, 87, 0.07)",
             // BASE COLOR QUE L'ON VAS USRT
-            // orange == "light-orange"
+            "orange" : "#F47E11",
             // green = #579B6F
             "dark" : "#1e2843"
 
