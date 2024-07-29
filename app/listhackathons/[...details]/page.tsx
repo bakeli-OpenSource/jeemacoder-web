@@ -5,6 +5,9 @@ import { NavBar } from "@/app/components/home/navBar";
 import { getHackathonById } from "@/app/utils/api/data";
 import { useQuery } from "@tanstack/react-query";
 import { DetailsCardItem } from "@/app/components/Card";
+import { Modal } from "@/app/components/modal";
+import { useState } from "react";
+import { MotivationPopup } from "@/app/components/participant/motivation-Popup";
 
 export default function Details({params} : {params : {details : string[]}}) {
     // const hackathonTheme = params[0]
@@ -15,8 +18,8 @@ export default function Details({params} : {params : {details : string[]}}) {
         queryFn : async () => await getHackathonById(hackathonId),
         queryKey : ["hackathon"],
     }); 
-    
-
+    const [showModal , setShowModal] = useState<boolean>(false)
+    const onClose = () => {setShowModal(!showModal)}
     const {name , date_debut , date_limite , structure_organisateur , theme , date_fin , lieu , prix , status , slogan} = data || []
 
     return (
@@ -36,7 +39,7 @@ export default function Details({params} : {params : {details : string[]}}) {
                             </div>
                         <div className="text-lg font-semibold">
                             <p className="text-sm bg-muted p-4 border rounded-md mb-5 text-dark">{slogan} </p>
-                            <Button types="button" size="small" className="bg-dark text-white ">
+                            <Button onClick={onClose} types="button" size="small" className="bg-dark text-white ">
                                 Participer
                             </Button>
                         </div>
@@ -76,6 +79,9 @@ export default function Details({params} : {params : {details : string[]}}) {
                 prix : {prix}
             </div>
             </div>
+            <Modal onClose={onClose} showModal={showModal} className="items-center">
+                <MotivationPopup />
+            </Modal>
         </div>
     )
 }
