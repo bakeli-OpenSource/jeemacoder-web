@@ -9,9 +9,8 @@ export const SmallHackthonCard = ({hackathonCard} : {hackathonCard: {
     organisateur : string ,
     coordonateur : string , 
     status : 'avenir' | 'enCours' | 'finis',
-    countNbrParticipant : number
 }}) => {
-    const {logo_url , date_debut , name , organisateur , countNbrParticipant , status} = hackathonCard
+    const {logo_url , date_debut , name , organisateur , status} = hackathonCard
     return (
         <div className="w-80 max-sm:h-60 bg-light-orange border rounded-xl p-4 flex flex-col justify-between ">
             <div className="flex gap-6 flex-col">
@@ -46,7 +45,6 @@ export const SmallHackthonCard = ({hackathonCard} : {hackathonCard: {
             <div className="flex justify-between text-xs items-center">
                 
                 <div className="flex items-center text-xs"> <ImgCollpsed />
-                    +{countNbrParticipant}participants
                 </div>
             </div>
         </div>

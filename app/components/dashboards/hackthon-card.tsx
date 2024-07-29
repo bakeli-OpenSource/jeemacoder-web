@@ -26,11 +26,11 @@ import { useRouter } from "next/navigation"
     
 
     const {logo_url , date_debut , name , structure_organisateur , 
-            status , participants , prix , theme , id} = hackathons
+            status , prix , theme , id} = hackathons
 
     const router = useRouter()
     return (
-        <div onClick={() => router.push(`listhackathons/details/${id}`)}
+        <div onClick={() => router.push(`listhackathons/details/${id}?name=${name}`)}
             className={clsx(" max-w-3xl rounded-md p-7 flex flex-col gap-7 cursor-pointer border-2" , {
                 " border-light-green" : theme == "vert" , 
                 "border-dark" : theme == "neutre",

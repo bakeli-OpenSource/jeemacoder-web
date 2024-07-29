@@ -46,3 +46,4 @@ export const getHackathonById = async (hackathonId : string) => {
         console.log( "fetch failed" , error);
     }
 }
+
