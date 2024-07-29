@@ -25,7 +25,7 @@ export default function Page () {
           {
             isLoading ? <SmallHackathonCardSkelethon /> : 
             <ListItem 
-                items={data.slice(1 , 2) || []}
+                items={data}
                 resourcename="hackathons"
                 component={SmallHackthonCard}
                 className=""
