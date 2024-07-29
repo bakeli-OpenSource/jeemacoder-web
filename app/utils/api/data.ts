@@ -26,3 +26,23 @@ export const getHackathons = async () => {
         throw err; // Rethrow the error so react-query can handle it
     }
 };
+
+export const getHackathonById = async (hackathonId : string) => {
+    const options = {
+        method: "GET",
+        headers: {
+            "accept": "application/json",
+            "Authorization": `Bearer ${authToken}`
+        }
+    };
+    try {
+        const response = await fetch(`http://localhost:8000/api/hackathons/${hackathonId}` , options)
+        const data = await response.json()
+        // console.log("details : " , response.json());
+        
+        return data
+
+    }catch(error){
+        console.log( "fetch failed" , error);
+    }
+}

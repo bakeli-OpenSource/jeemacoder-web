@@ -9,7 +9,7 @@ const config: Config = {
   theme: {
     extend: {
       backgroundImage: {
-        "gradient-radial-home": " linear-gradient(0deg, rgba(10,114,115,1) 0%, rgba(0,205,205,0.5186449579831933) 100%)"
+        "gradient-radial-home": " radial-gradient(circle, rgba(244,126,17,0.804359243697479) 0%, rgba(30,40,67,1) 43%)"
       },
         colors : {
             "base-blue" : "#15548E",
@@ -22,12 +22,12 @@ const config: Config = {
             "destruction-red" : "#D93842",
             "foreground-green" : "#1E490E",
             // 
-            "light-green" : "#62D938",
+            "light-green" : "rgba(98, 217, 56, 0.54)",
             "dark-green" : "#0F4424",
-            "dark-green-hover" : "#18793F",
+            "dark-green-hover" : "#00AB44",
             "light-orange" : "rgba(237, 159, 87, 0.07)",
             // BASE COLOR QUE L'ON VAS USRT
-            // orange == "light-orange"
+            "orange" : "#F47E11",
             // green = #579B6F
             "dark" : "#1e2843"
 
