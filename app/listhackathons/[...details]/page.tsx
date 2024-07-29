@@ -10,14 +10,13 @@ import { useState } from "react";
 import { MotivationPopup } from "@/app/components/participant/motivation-Popup";
 
 export default function Details({params} : {params : {details : string[]}}) {
-    // const hackathonTheme = params[0]
     const [detailsPath , hackathonId ] = params.details
-    console.log(hackathonId);
     
     const {data , isLoading , isError} = useQuery({
         queryFn : async () => await getHackathonById(hackathonId),
         queryKey : ["hackathon"],
     }); 
+
     const [showModal , setShowModal] = useState<boolean>(false)
     const onClose = () => {setShowModal(!showModal)}
     const {name , date_debut , date_limite , structure_organisateur , theme , date_fin , lieu , prix , status , slogan} = data || []
@@ -80,7 +79,7 @@ export default function Details({params} : {params : {details : string[]}}) {
             </div>
             </div>
             <Modal onClose={onClose} showModal={showModal} className="items-center">
-                <MotivationPopup />
+                <MotivationPopup hackathon_id={hackathonId} />
             </Modal>
         </div>
     )
