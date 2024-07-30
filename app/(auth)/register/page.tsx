@@ -70,7 +70,7 @@ const handleSubmit = (e : ChangeEvent<HTMLFormElement> ) => {
     }
   }).then(res => console.log( "success !! , you'r subscribed" , res))
     .catch(res => console.log(res))
-
+    
 }
   return (
     <div className="h-screen flex justify-center items-center max-w-4xl m-auto max-sm:flex-col">

@@ -35,8 +35,8 @@ export default function Page() {
             </div>
             <div className="p-5">
                 {activeTab === "details" && <HackathonDetails />}
-                {activeTab === "enrolment" && <EnrolementParticipants />}
-                {activeTab === "participant" && <GestionParticipants />} {/* Add this line */}
+                {activeTab === "enrolment" && <EnrolementParticipants hackathonId="1"/>}
+                {activeTab === "participant" && <GestionParticipants hackathonId="1" />} {/* Add this line */}
             </div>
         </div>
     );
