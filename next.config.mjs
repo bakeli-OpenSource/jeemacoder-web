@@ -6,7 +6,7 @@ const nextConfig = {
         return [
             {
                 source : `/public/storage/storage/:path*`,
-                destination : `${backend_url}/public/storage/storage/:path*`
+                destination : `http://localhost:8000/public/storage/storage/:path*`
             }
         ]
     }

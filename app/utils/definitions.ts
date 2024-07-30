@@ -11,7 +11,12 @@ export type Hackathon = {
     lieu : string,
     date_debut : string,
     date_fin : string,
+    date_limite : string,
+    slogan : string,
     prix : string ,
+    heure_debut: string,
+    heure_fin : string,
+
 }
 
 export type User = {

@@ -7,7 +7,7 @@ interface Props {
     hackathonId: string;
 }
 
-export const GestionParticipants: React.FC<Props> = ({ hackathonId }) => {
+export const GestionParticipants: React.FC<Props> = ({ hackathonId } : {hackathonId : string}) => {
     const [participants, setParticipants] = useState<Individuel[]>([]);
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 8;

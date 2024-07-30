@@ -44,7 +44,7 @@ const Form = () => {
   const handleChange = (e : ChangeEvent<HTMLInputElement>) => {
   const input = e.currentTarget;
   setValue({...value , [input.id] : input.value})
-}
+  }
 // la donc il faut que je créé un custum hook qui return le role
 
 
@@ -160,9 +160,11 @@ const handleSubmit = (e : ChangeEvent<HTMLFormElement> ) => {
   </div>
   <div className="w-full md:w-1/2 mt-4 md:mt-0">
     {
-      role === "organisateur" ? 
-      <div>Inscrivez vous en tant que {role} </div> : 
-      <div> inscrivez vous en tanque {role} </div>
+      role === "organisateur" ?
+      <div> 
+        
+      </div> :
+      <div> </div>
     }
     
   </div>

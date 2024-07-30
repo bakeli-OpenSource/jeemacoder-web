@@ -8,6 +8,8 @@ import { DetailsCardItem } from "@/app/components/Card";
 import { Modal } from "@/app/components/modal";
 import { useState } from "react";
 import { MotivationPopup } from "@/app/components/participant/motivation-Popup";
+import Image from "next/image";
+import clsx from "clsx";
 
 export default function Details({params} : {params : {details : string[]}}) {
     const [detailsPath , hackathonId ] = params.details
@@ -19,7 +21,7 @@ export default function Details({params} : {params : {details : string[]}}) {
 
     const [showModal , setShowModal] = useState<boolean>(false)
     const onClose = () => {setShowModal(!showModal)}
-    const {name , date_debut , date_limite , structure_organisateur , theme , date_fin , lieu , prix , status , slogan} = data || []
+    const {name , logo_url , date_debut , date_limite , structure_organisateur , theme , date_fin , lieu , prix , status , slogan} = data || []
 
     return (
         <div>
@@ -30,10 +32,20 @@ export default function Details({params} : {params : {details : string[]}}) {
                 <div className="flex gap-10">
                     <div className=" p-4 flex flex-col gap-5">
                             <div className="flex gap-10">
-                                <div className="w-20 h-20 border rounded-lg"></div>
+                                    <Image
+                                        src={`/hotelPic.jpg`}
+                                        alt=""
+                                        width={150}
+                                        height={120}
+                                        className="rounded-lg"
+                                    />
                                 <div>
-                                <h1 className="text-3xl font-semibold"> {name}  </h1>
-                                <p> {structure_organisateur} </p>
+                                <h1 className={clsx("text-3xl font-semibold" , {
+                                    "text-dark-green-hover" : theme == "vert",
+                                    "text-orange" : theme == "orange",
+                                    "text-dark" : theme == "neutre",
+                                })}> {name}  </h1>
+                                <p>{structure_organisateur}</p>
                                 </div>
                             </div>
                         <div className="text-lg font-semibold">
@@ -79,7 +91,7 @@ export default function Details({params} : {params : {details : string[]}}) {
             </div>
             </div>
             <Modal onClose={onClose} showModal={showModal} className="items-center">
-                <MotivationPopup hackathon_id={hackathonId} />
+                <MotivationPopup hackathon_id={hackathonId} onClose={onClose} />
             </Modal>
         </div>
     )
