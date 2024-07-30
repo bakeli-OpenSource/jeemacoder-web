@@ -14,9 +14,8 @@ if (typeof window !== "undefined") {
   export const MotivationPopup = ({hackathon_id , onClose} : {hackathon_id : string , onClose : () => void}) => {
       const [motivation , setMotivation] = useState('')
       const [participation , setParticipation] = useState<string>('chercheur')
-      console.log(status);
       
-const router = useRouter()
+      const router = useRouter()
 const mutation = useMutation({
     mutationFn : async (formData : BodyInit) => {
         return await fetch('http://localhost:8000/api/indiv/create' , {
@@ -31,24 +30,25 @@ const mutation = useMutation({
         .then(res => router.push(`/listhackathons/details/${hackathon_id}`))
         .catch((error) => console.log(error))
     }
-    })
+})
 
-    const handleSubmit = (e : ChangeEvent<HTMLFormElement>) => {
-        e.preventDefault()
+const handleSubmit = (e : ChangeEvent<HTMLFormElement>) => {
+    e.preventDefault()
         const formData = new FormData() ;
             formData.append('status' , "attente")
             formData.append('motivation' , motivation)
+            formData.append('participation' , participation)
             formData.append('hackathon_id' , hackathon_id)
             mutation.mutate(formData)
-
+            
             // for(let [key , value] of formData.entries()) {
-            // console.log(`${key} : ${value}`)}
-        }
+                // console.log(`${key} : ${value}`)}
+            }
         const [chercheur , setChercheur] = useState<boolean>(true)
         const [solo , setSolo] = useState<boolean>(false)
         const [equipeDeja , setEquipeDeja] = useState<boolean>(false)
         
-
+        
     return (
         <div className="bg-white shadow-md px-9 py-4 flex flex-col gap-y-3 rounded-md">
         <div className="p-1 rounded-full cursor-pointer float-right w-8" onClick={onClose}> <XIcon /> </div>
@@ -58,7 +58,7 @@ const mutation = useMutation({
         <textarea rows={3} className="outline-none px-3 py-1 border rounded-md w-80 text-xs" 
             placeholder="ajoutez votre motivation et quelque chose " value={motivation} 
             onChange={(e : ChangeEvent<HTMLTextAreaElement>) => { setMotivation(e.target.value) }} 
-            />    
+            />
         <div className="flex gap-3">
             <CheckboxEl label="#ChercheUneEquipe" checked={chercheur} onClick={() => {
                 setChercheur(true);
@@ -91,6 +91,5 @@ const CheckboxEl = ({label , checked , onClick , onChange} : {label : string , c
     return ( <div className="flex items-center gap-2" onClick={onClick}>
         <input type="checkbox" className="" checked={checked} />
         <label htmlFor="" className="text-xs" > {label} </label>
-        
     </div> )
 }
