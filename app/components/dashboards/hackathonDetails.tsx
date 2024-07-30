@@ -1,39 +1,59 @@
-"use client"
-import { Pencil1Icon } from "@radix-ui/react-icons"
-import { useState } from "react"
-import Image from "next/image"
-import FormInput from "../formDetailsHackathon/input"
-import { Button } from "../formDetailsHackathon/button"
-import { Hackathon } from "@/app/utils/definitions"
-import { useQuery } from "@tanstack/react-query"
-import { getHackathons } from "@/app/utils/api/data"
+"use client";
+import { Pencil1Icon } from "@radix-ui/react-icons";
+import { useState, useEffect } from "react";
+import Image from "next/image";
+import FormInput from "../formDetailsHackathon/input";
+import { Button } from "../formDetailsHackathon/button";
+import { Hackathon } from "@/app/utils/definitions";
+import { useQuery, useMutation } from "@tanstack/react-query";
+import { getHackathonsByHackathonsId, updateHackathon } from "@/app/utils/api/data";
+import { useRouter } from 'next/navigation';
 
 export const HackathonDetails = () => {
+    const router = useRouter();
     const { data, isLoading, isError } = useQuery({
-        queryFn: async () => await getHackathons(),
+        queryFn: async () => await getHackathonsByHackathonsId(),
         queryKey: ["hackathons"],
     });
 
+    // State to manage editable field and form values
     const [editableField, setEditableField] = useState<string | null>(null);
-    const [value, setValue] = useState<Hackathon>({
-        name: 'Jeemacoder 2024', 
-        date_debut: '2025-04-23', 
-        date_fin: '2025-04-23', 
-        lieu: 'HLM Gr Yoff', 
-        prix: 'Stage',
-        structure_organisateur: 'Bakeli School of Tech'
-    });
+    const [value, setValue] = useState<Hackathon | null>(null);
+
+    // Effect to update the form values when data is fetched
+    useEffect(() => {
+        if (data) {
+            setValue(data);
+        }
+    }, [data]);
 
     const handleEditClick = (field: string) => {
         setEditableField(field === editableField ? null : field);
     };
 
+    const mutation = useMutation({
+        mutationFn: async () => {
+            if (!value) return;
+            await updateHackathon(value.id, value);
+        },
+        onSuccess: () => {
+            router.refresh(); // Optionally refresh the page or redirect
+        },
+    });
+
+    const handleSubmit = (e: React.FormEvent) => {
+        e.preventDefault();
+        mutation.mutate();
+    };
+
     if (isLoading) return <div>Loading...</div>;
     if (isError) return <div>Error loading hackathons</div>;
 
+    if (!value) return null; // Ensure value is not null
+
     return (
         <div className="p-8 bg-white shadow-lg rounded-lg">
-            <form className="w-full space-y-6">
+            <form className="w-full space-y-6" onSubmit={handleSubmit}>
                 <div className="flex items-center gap-5">
                     <div className="w-24 h-24 relative rounded-lg overflow-hidden">
                         <Image src='/hotelPic.jpg' layout="fill" objectFit="cover" alt="Hackathon Image" />
@@ -59,13 +79,17 @@ export const HackathonDetails = () => {
                     <textarea
                         placeholder="Description"
                         title=""
-                        rows={5} 
-                        className="w-full outline-none p-4 rounded-lg border bg-gray-50 transition duration-300 ease-in-out hover:bg-white focus:bg-white" 
-                        readOnly
-                        value="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Delectus veritatis aperiam harum nemo non at, quam voluptas facere illum suscipit distinctio eius. Aperiam maxime natus, ducimus maiores voluptatem libero qui?" 
+                        rows={5}
+                        className="w-full outline-none p-4 rounded-lg border bg-gray-50 transition duration-300 ease-in-out hover:bg-white focus:bg-white"
+                        readOnly={editableField !== 'description'}
+                        value={value.description || "Description not available"}
+                        onChange={(e) => setValue({ ...value, description: e.target.value })}
                     />
                     <div className="p-2">
-                        <Pencil1Icon className="hover:bg-gray-200 rounded-full cursor-pointer transition duration-300 ease-in-out" />
+                        <Pencil1Icon 
+                            className="hover:bg-gray-200 rounded-full cursor-pointer transition duration-300 ease-in-out"
+                            onClick={() => handleEditClick('description')} 
+                        />
                     </div>
                 </div>
                 <div className="grid grid-cols-2 gap-5">
@@ -162,15 +186,28 @@ export const HackathonDetails = () => {
                     </div>
                     <div className="flex flex-col w-full">
                         <label className="text-sm font-medium text-gray-900 mb-1">Thème</label>
-                        <select title="Theme" name="Theme" className="outline-none border p-3 rounded-md bg-gray-50 transition duration-300 ease-in-out hover:bg-white focus:bg-white w-full">
+                        <select 
+                            title="Theme" 
+                            name="Theme" 
+                            className="outline-none border p-3 rounded-md bg-gray-50 transition duration-300 ease-in-out hover:bg-white focus:bg-white w-full"
+                            value={value.theme || 'orange'}
+                            onChange={(e) => setValue({ ...value, theme: e.target.value })}
+                            disabled={editableField !== 'theme'}
+                        >
                             <option value="orange">Orange</option>
                             <option value="vert">Vert</option>
                             <option value="bleu">Bleu</option>
                         </select>
                     </div>
                 </div>
-                <Button className="mt-4 bg-orange-400">Modifier</Button>
+                <Button 
+                    type="submit" 
+                    className="mt-4 bg-orange-400"
+                    disabled={mutation.isLoading}
+                >
+                    {mutation.isLoading ? 'Enregistrement...' : 'Modifier'}
+                </Button>
             </form>
         </div>
-    )
-}
+    );
+};
