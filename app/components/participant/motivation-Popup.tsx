@@ -36,7 +36,7 @@ const mutation = useMutation({
     const handleSubmit = (e : ChangeEvent<HTMLFormElement>) => {
         e.preventDefault()
         const formData = new FormData() ;
-            formData.append('status' , "en attente")
+            formData.append('status' , "attente")
             formData.append('motivation' , motivation)
             formData.append('hackathon_id' , hackathon_id)
             mutation.mutate(formData)

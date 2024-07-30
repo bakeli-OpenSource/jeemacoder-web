@@ -88,7 +88,7 @@ export const updateHackathon = async (id: string, updatedData: Partial<Hackathon
 };
 
 export const getParticipants = async (hackathonId: string): Promise<Individuel[]> => {
-    const response = await fetch(`http://localhost:8000/api/indiv/index/1`, {
+    const response = await fetch(`http://localhost:8000/api/indiv/index/2`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
