@@ -13,3 +13,27 @@ export type Hackathon = {
     date_fin : string,
     prix : string ,
 }
+
+export type User = {
+    id: string;
+    firstname: string;
+    lastname: string;
+    pays: string;
+    ville: string;
+    email: string;
+    metier: string;
+    role: string;
+    photo: string;
+    created_at: string;
+    updated_at: string;
+};
+
+export type Individuel = {
+    id: string;
+    user: User; 
+    hackathon_id: string; 
+    motivation: string; 
+    status: 'attente' | 'accepté' | 'refusé'; 
+    created_at: string; 
+    updated_at: string; 
+};

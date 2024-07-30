@@ -1,24 +1,37 @@
 import { Cross1Icon, CheckIcon, EyeOpenIcon, SlashIcon } from "@radix-ui/react-icons";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { getParticipants } from "@/app/utils/api/data"; // Assurez-vous que ce chemin est correct
+import { Individuel } from '@/app/utils/definitions'; // Assurez-vous que ce chemin est correct
 
-export const GestionParticipants = () => {
-    const participants = [
-        { id: 1, nom: "John", prenom: "Doe", projet: "Project A" },
-        { id: 2, nom: "Jane", prenom: "Smith", projet: "Project B" },
-        { id: 3, nom: "Alice", prenom: "Johnson", projet: "Project C" },
-        { id: 4, nom: "Bob", prenom: "Brown", projet: "Project D" },
-        { id: 5, nom: "Carol", prenom: "Wilson", projet: "Project E" },
-        { id: 6, nom: "David", prenom: "Taylor", projet: "Project F" },
-        { id: 7, nom: "Eve", prenom: "Martinez", projet: "Project G" },
-        { id: 8, nom: "Frank", prenom: "Wright", projet: "Project H" },
-        { id: 9, nom: "Grace", prenom: "Lee", projet: "Project I" },
-        { id: 10, nom: "Hank", prenom: "Kim", projet: "Project J" },
-        { id: 11, nom: "Ivy", prenom: "Clark", projet: "Project K" },
-        { id: 12, nom: "Jack", prenom: "Turner", projet: "Project L" },
-    ];
+interface Props {
+    hackathonId: string;
+}
 
-    const itemsPerPage = 8;
+export const GestionParticipants: React.FC<Props> = ({ hackathonId }) => {
+    const [participants, setParticipants] = useState<Individuel[]>([]);
     const [currentPage, setCurrentPage] = useState(1);
+    const itemsPerPage = 8;
+
+    useEffect(() => {
+        const fetchParticipants = async () => {
+            try {
+                const response = await getParticipants(hackathonId);
+                console.log("Data received from API:", response);
+
+                // Assurez-vous que la clé `Individuels` est correcte
+                if (response.success && Array.isArray(response.Individuels)) {
+                    setParticipants(response.Individuels.filter(participant => participant.status === 'accepté'));
+                } else {
+                    console.error("Expected an array of participants under 'Individuels', but got:", response);
+                }
+            } catch (error) {
+                console.error("Error fetching participants:", error);
+            }
+        };
+
+        fetchParticipants();
+    }, [hackathonId]);
+
     const totalPages = Math.ceil(participants.length / itemsPerPage);
 
     const currentParticipants = participants.slice(
@@ -26,17 +39,17 @@ export const GestionParticipants = () => {
         currentPage * itemsPerPage
     );
 
-    const handleDetails = (id) => {
+    const handleDetails = (id: string) => {
         console.log(`Showing details for participant ${id}`);
     };
 
-    const handleBan = (id) => {
+    const handleBan = (id: string) => {
         console.log(`Banning participant ${id}`);
     };
 
     return (
         <div className="p-8 bg-white shadow-lg rounded-lg">
-            <h2 className="text-xl font-semibold mb-4">Enrôlement</h2>
+            <h2 className="text-xl font-semibold mb-4">Gestion des Participants</h2>
             <div className="overflow-x-auto">
                 <table className="min-w-full bg-white">
                     <thead>
@@ -50,9 +63,9 @@ export const GestionParticipants = () => {
                     <tbody>
                         {currentParticipants.map((participant) => (
                             <tr key={participant.id}>
-                                <td className="py-2 px-4 border-b border-gray-200">{participant.nom}</td>
-                                <td className="py-2 px-4 border-b border-gray-200">{participant.prenom}</td>
-                                <td className="py-2 px-4 border-b border-gray-200">{participant.projet}</td>
+                                <td className="py-2 px-4 border-b border-gray-200">{participant.user.firstname}</td>
+                                <td className="py-2 px-4 border-b border-gray-200">{participant.user.lastname}</td>
+                                <td className="py-2 px-4 border-b border-gray-200">{participant.motivation}</td>
                                 <td className="py-2 px-4 border-b border-gray-200">
                                     <div className="flex space-x-2">
                                         <button title="Details" className="text-blue-500 hover:bg-blue-100 rounded p-1" onClick={() => handleDetails(participant.id)}>
