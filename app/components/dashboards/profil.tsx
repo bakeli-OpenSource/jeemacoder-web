@@ -15,7 +15,6 @@ export const Profil = () => {
         queryKey : ["profil"],
         queryFn : async () => await getUser()
     })
-    
 
     return <div className="h-40 bg-white p-3 justify-between flex flex-col rounded-md">
     <div className="flex justify-between">
@@ -23,8 +22,8 @@ export const Profil = () => {
         <BellIcon /> 
     </div>
         {isLoading ?
-        <div>user empty</div> :
-        <Avatar profil={data} variante="small" className="gap-1"/> 
+        <div><span>user empty</span> </div> :
+        <Avatar profil={data || []} variante="small" className="gap-1"/> 
         }
     </div>
 }

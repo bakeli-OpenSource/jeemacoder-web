@@ -24,7 +24,7 @@ export default function Page () {
                 <h1 className="text-sm">Dashboard</h1>
                 <p className="text-xs text-[#636364]"> Ici vous avez une vue generale de vos Hackathons </p>
             </div>
-            <Button href="/createNewHackathon" types="link" size="large" className="border bg-[#F47E11] text-white rounded-md mt-2"> Nouveau hackaton </Button>
+            <Button href="/createNewHackathon" types="link" size="small" className="border bg-[#F47E11] text-white text-sm"> Nouveau hackaton </Button>
         </div>
 
         <div className="flex gap-6 px-5 py-10 max-xl:grid max-xl:grid-cols-1">

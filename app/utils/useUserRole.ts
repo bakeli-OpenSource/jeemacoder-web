@@ -5,3 +5,8 @@ export const useUserRole = () => {
     return role.get("role") || 'participant'
 }
 
+
+export const useShowModal = () => {
+    const register = useSearchParams();
+    return register.get("register") || null
+}

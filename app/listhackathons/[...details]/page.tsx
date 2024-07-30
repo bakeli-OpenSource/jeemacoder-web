@@ -10,6 +10,7 @@ import { useState } from "react";
 import { MotivationPopup } from "@/app/components/participant/motivation-Popup";
 import Image from "next/image";
 import clsx from "clsx";
+import hackathonlogoLoader from "@/app/utils/hackathonlogoLoader";
 
 export default function Details({params} : {params : {details : string[]}}) {
     const [detailsPath , hackathonId ] = params.details
@@ -33,19 +34,21 @@ export default function Details({params} : {params : {details : string[]}}) {
                     <div className=" p-4 flex flex-col gap-5">
                             <div className="flex gap-10">
                                     <Image
-                                        src={`/hotelPic.jpg`}
+                                        src={`${logo_url}`}
+                                        loader={hackathonlogoLoader}
                                         alt=""
                                         width={150}
                                         height={120}
                                         className="rounded-lg"
                                     />
                                 <div>
-                                <h1 className={clsx("text-3xl font-semibold" , {
+                                <h1 className={clsx(' "text-3xl font-semibold"' , {
                                     "text-dark-green-hover" : theme == "vert",
                                     "text-orange" : theme == "orange",
                                     "text-dark" : theme == "neutre",
+
                                 })}> {name}  </h1>
-                                <p>{structure_organisateur}</p>
+                                <p> {structure_organisateur} </p>
                                 </div>
                             </div>
                         <div className="text-lg font-semibold">
