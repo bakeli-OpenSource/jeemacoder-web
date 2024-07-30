@@ -1,13 +1,10 @@
 import Image from "next/image"
-import { Button } from "../button"
 import { ImgCollpsed } from "./img-collabsed"
-import { useRef, useState } from "react"
-import { Modal } from "../modal"
-import Link from "next/link"
-import { DetailsButton } from "./detailsButton"
 import { BanknoteIcon, Calendar, SmilePlus, TagsIcon } from "lucide-react"
 import clsx from "clsx"
 import { useRouter } from "next/navigation"
+import {ErrorBoundary} from 'react-error-boundary'
+import hackathonlogoLoader from "@/app/utils/hackathonlogoLoader"
 
     export const HackathonCard = ({hackathons , onClick , } : {hackathons : {
     logo_url : string , 
@@ -40,11 +37,15 @@ import { useRouter } from "next/navigation"
             className={clsx(" p-7 flex flex-col gap-7 " )}>
             <div className="flex gap-10 ">
                 <div className="flex flex-col gap-5">
-                <Image src={`/${logo_url}`}
+                {/* <ErrorBoundary fallback={
+                    <div className="w-40 h-32 border"> error </div>
+                }> */}
+                <Image src={`${logo_url}`} loader={hackathonlogoLoader}
                     width={130} 
                     height={100} 
                     alt="hack logo" 
                     className="border rounded-md"/>
+                    {/* </ErrorBoundary> */}
                 <div className="gap-4">
                     <div> <ImgCollpsed /> </div>
                     <div className="font-semibold text-sm">+{100}participants</div>

@@ -7,7 +7,7 @@ export type ButtonProps = ComponentPropsWithoutRef<"button"> & {
     size : "large" | "small"
     className ?: string ;
     types : "button" | "link",
-    href ?: string
+    href ?: string | {}
 }
 
 export const Button = ({className , 
@@ -35,7 +35,8 @@ export const Button = ({className ,
             "border rounded-full" : variant === "rounded",
             "" : variant === "grounded",
             "" : variant === "danger",
-            "px-8 py-3" : size === "large", "px-3 py-1 border flex items-center gap-2" : size === "small",
+            "px-8 py-3" : size === "large", 
+            "px-3 py-1 flex gap-3 items-center text-sm max-w-80" : size === "small",
         } , className)} 
         >
         {props.children}
