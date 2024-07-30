@@ -27,18 +27,20 @@ import { useRouter } from "next/navigation"
 
     const {logo_url , date_debut , name , structure_organisateur , 
             status , prix , theme , id} = hackathons
-
+        
     const router = useRouter()
     return (
+        <div className={clsx("flex max-w-3xl cursor-pointer rounded-lg border overflow-auto" , {
+            " border-light-green" : theme == "vert" , 
+            "border-dark" : theme == "neutre",
+            "border-orange " : theme == "orange"
+        })}>
+            <div className="w-2 hover:w-4 bg-dark"></div>
         <div onClick={() => router.push(`listhackathons/details/${id}?name=${name}`)}
-            className={clsx(" max-w-3xl rounded-md p-7 flex flex-col gap-7 cursor-pointer border-2" , {
-                " border-light-green" : theme == "vert" , 
-                "border-dark" : theme == "neutre",
-                "border-orange " : theme == "orange"
-            })}>
+            className={clsx(" p-7 flex flex-col gap-7 " )}>
             <div className="flex gap-10 ">
                 <div className="flex flex-col gap-5">
-                <Image src={`/hotelPic.jpg`}
+                <Image src={`/${logo_url}`}
                     width={130} 
                     height={100} 
                     alt="hack logo" 
@@ -78,6 +80,7 @@ import { useRouter } from "next/navigation"
             <div  className="flex">
             </div>
         </div>
+    </div>
     )
 }
 

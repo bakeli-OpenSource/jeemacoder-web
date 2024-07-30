@@ -77,12 +77,12 @@ export default function Page() {
 
     return (
         <div className="">
-            <div className="max-w-4xl m-auto my-1 p-10 bg-light-orange rounded-md">
+            <div className="max-w-4xl m-auto my-1 p-10 rounded-md">
                <div className="">
                     <div onClick={onCloseModal} className="border cursor-pointer flex items-center gap-2 max-w-32 py-1 rounded-md justify-center" >
                         <Undo2 className="stroke-1 size-3"/> <span>Retour</span>
                     </div>
-                    <p className="font-semibold py-5 text-lg text-dark ">Commencez a creer votre hackathon</p>
+                    <p className=" py-5 text-4xl text-dark ">Commencez a creer votre hackathon</p>
                     <form onSubmit={onSubmit}
                         className="flex flex-col gap-5 pb-20 ">
                             <label htmlFor="logo_url" className="mb-2 text-sm font-semibold flex flex-col gap-2 items-center border rounded-md max-w-xs py-5 border-white"> 
