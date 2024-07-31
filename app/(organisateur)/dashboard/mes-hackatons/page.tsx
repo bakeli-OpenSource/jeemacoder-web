@@ -36,7 +36,7 @@ export default function Page() {
                             items={data}
                             resourcename="hackathonCard"
                             component={SmallHackthonCard}
-                            className=""
+                            className="grid grid-cols-2 gap-y-5"
                             onClick={(item) => handleCardClick(item.id)}
                             withPopup={false}
                             href=""  // Pas besoin de href ici

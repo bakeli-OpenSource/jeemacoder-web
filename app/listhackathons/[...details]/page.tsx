@@ -53,7 +53,7 @@ export default function Details({params} : {params : {details : string[]}}) {
                             </div>
                         <div className="text-lg font-semibold">
                             <p className="text-sm bg-muted p-4 border rounded-md mb-5 text-dark">{slogan} </p>
-                            <Button onClick={onClose} types="button" size="small" className="bg-dark text-white ">
+                            <Button onClick={onClose} types="button" size="small" className="bg-dark text-white text-sm">
                                 Participer
                             </Button>
                         </div>
@@ -75,8 +75,8 @@ export default function Details({params} : {params : {details : string[]}}) {
                 <DetailsCardItem icon={BanknoteIcon} text={prix} theme={theme}/>
             </div>
             <div className="flex flex-col gap-5">
-                <DetailsCardItem icon={Calendar} text=" Demarrage: " amount={date_debut} amountthememounttheme={theme} />
-                <DetailsCardItem icon={Calendar} text=" Fin :" amount={date_fin} amountthememounttheme={theme} />
+                <DetailsCardItem icon={Calendar} text=" Demarrage: " amount={date_debut} amounttheme={theme} />
+                <DetailsCardItem icon={Calendar} text=" Fin :" amount={date_fin} amounttheme={theme} />
             </div>
             <div>
                 <TagsIcon className="stroke-1"/>
