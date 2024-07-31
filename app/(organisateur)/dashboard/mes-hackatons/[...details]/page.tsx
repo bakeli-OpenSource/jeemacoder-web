@@ -4,7 +4,9 @@ import { HackathonDetails } from "@/app/components/dashboards/hackathonDetails";
 import { EnrolementParticipants } from "@/app/components/dashboards/enrolementParticipants";
 import { GestionParticipants } from "@/app/components/dashboards/gestionParticipants"; // Add this import
 
-export default function Page() {
+export default function Page({params} : {params : {details : string[]}}) {
+    const [detailsPath , hackathonId ] = params.details
+    console.log('id : ',hackathonId);
     const [activeTab, setActiveTab] = useState("details");
 
     return (
@@ -34,9 +36,9 @@ export default function Page() {
                 </button>
             </div>
             <div className="p-5">
-                {activeTab === "details" && <HackathonDetails />}
-                {activeTab === "enrolment" && <EnrolementParticipants hackathonId="1"/>}
-                {activeTab === "participant" && <GestionParticipants hackathonId="1" />} {/* Add this line */}
+                {activeTab === "details" && <HackathonDetails hackathonId={hackathonId} />}
+                {activeTab === "enrolment" && <EnrolementParticipants hackathonId={hackathonId}/>}
+                {activeTab === "participant" && <GestionParticipants hackathonId={hackathonId} />} {/* Add this line */}
             </div>
         </div>
     );
