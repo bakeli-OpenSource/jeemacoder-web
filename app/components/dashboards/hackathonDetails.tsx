@@ -9,18 +9,25 @@ import { useQuery, useMutation } from "@tanstack/react-query";
 import { getHackathonsByHackathonsId, updateHackathon } from "@/app/utils/api/data";
 import { useRouter } from 'next/navigation';
 
-export const HackathonDetails = () => {
+// Définition des props pour le composant
+interface Props {
+    hackathonId: string;
+}
+
+export const HackathonDetails: React.FC<Props> = ({ hackathonId }) => {
     const router = useRouter();
+
+    // Requête pour obtenir les détails du hackathon
     const { data, isLoading, isError } = useQuery({
-        queryFn: async () => await getHackathonsByHackathonsId(),
-        queryKey: ["hackathons"],
+        queryFn: async () => await getHackathonsByHackathonsId(hackathonId),
+        queryKey: ["hackathon", hackathonId],
     });
 
-    // State to manage editable field and form values
+    // État pour gérer les champs modifiables et les valeurs du formulaire
     const [editableField, setEditableField] = useState<string | null>(null);
     const [value, setValue] = useState<Hackathon | null>(null);
 
-    // Effect to update the form values when data is fetched
+    // Effet pour mettre à jour les valeurs du formulaire lorsque les données sont récupérées
     useEffect(() => {
         if (data) {
             setValue(data);
@@ -34,10 +41,10 @@ export const HackathonDetails = () => {
     const mutation = useMutation({
         mutationFn: async () => {
             if (!value) return;
-            await updateHackathon(value.id, value);
+            await updateHackathon(hackathonId, value);
         },
         onSuccess: () => {
-            router.refresh(); // Optionally refresh the page or redirect
+            router.refresh(); // Optionnellement rafraîchir la page ou rediriger
         },
     });
 
@@ -47,9 +54,9 @@ export const HackathonDetails = () => {
     };
 
     if (isLoading) return <div>Loading...</div>;
-    if (isError) return <div>Error loading hackathons</div>;
+    if (isError) return <div>Error loading hackathon details</div>;
 
-    if (!value) return null; // Ensure value is not null
+    if (!value) return null; // Assurez-vous que la valeur n'est pas null
 
     return (
         <div className="p-8 bg-white shadow-lg rounded-lg">

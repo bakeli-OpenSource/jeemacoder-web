@@ -28,7 +28,7 @@ export const getHackathons = async () => {
     }
 };
 
-export const getHackathonsByHackathonsId = async () => {
+export const getHackathonsByHackathonsId = async (hackathonId : string) => {
     const options = {
         method: "GET",
         headers: {
@@ -37,7 +37,7 @@ export const getHackathonsByHackathonsId = async () => {
         }
     };
     try {
-        const response = await fetch('http://localhost:8000/api/hackathons/organisateur/hackathon/1', options);
+        const response = await fetch(`http://localhost:8000/api/hackathons/organisateur/hackathon/${hackathonId}`, options);
         if (!response.ok) {
             throw new Error(`HTTP error! Status: ${response.status}`);
         }
@@ -71,7 +71,7 @@ export const getHackathonById = async (hackathonId : string) => {
 }
 
 export const updateHackathon = async (id: string, updatedData: Partial<Hackathon>) => {
-    const response = await fetch(`http://localhost:8000/api/hackathons/update/1`, {
+    const response = await fetch(`http://localhost:8000/api/hackathons/update/${id}`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
@@ -88,7 +88,7 @@ export const updateHackathon = async (id: string, updatedData: Partial<Hackathon
 };
 
 export const getParticipants = async (hackathonId: string): Promise<Individuel[]> => {
-    const response = await fetch(`http://localhost:8000/api/indiv/index/2`, {
+    const response = await fetch(`http://localhost:8000/api/indiv/index/${hackathonId}`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
