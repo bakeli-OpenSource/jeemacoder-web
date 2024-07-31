@@ -7,6 +7,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { ChangeEvent, Suspense, useEffect, useState } from "react";
+import { Undo2 } from "lucide-react";
 
 
 type Value = {
@@ -72,12 +73,16 @@ const handleSubmit = (e : ChangeEvent<HTMLFormElement> ) => {
     .catch(res => console.log(res))
     
 }
-  return (
-    <div className="h-screen flex justify-center items-center max-w-4xl m-auto max-sm:flex-col">
+  return ( <div>
+
+        <Link href="/user_role" className="border m-10 flex items-center gap-2 max-w-32 py-1 rounded-md justify-center" >
+          <Undo2 className="stroke-1 size-3"/> <span>Retour</span>
+      </Link>
+    <div className="flex justify-center items-center max-w-4xl m-auto max-sm:flex-col">
         <div className="max-w-3xl m-auto flex flex-col gap-20 max-sm:gap-2 justify-center items-center py-10 px-20 max-sm:px-5 rounded-md">
           <form className="" onSubmit={handleSubmit}>
           <span className="">Inscrivez vous et participez à des hackathons </span>
-            <div className="flex flex-col gap-7 py-10">
+            <div className="flex flex-col gap-7 py-6">
              <div className="flex flex-col gap-2">
               <div className="flex gap-3 ">
               <FormInput
@@ -116,7 +121,7 @@ const handleSubmit = (e : ChangeEvent<HTMLFormElement> ) => {
                     onChange={handleChange}
                     className=""
                     label="Password"
-                  />
+                    />
                   <FormInput
                   id='metier'
                     type="name"
@@ -169,5 +174,6 @@ const handleSubmit = (e : ChangeEvent<HTMLFormElement> ) => {
     
   </div>
   </div>
+    </div>
   );
 }

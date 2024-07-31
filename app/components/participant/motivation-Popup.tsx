@@ -24,16 +24,14 @@ const mutation = useMutation({
                 "authorization" : `Bearer ${authToken} ` 
             },
             body : formData
-        }).then(() => router.back())
-        .then((res) => console.log( "demande envoyé", res ))
-        .then(res => router.push(`/listhackathons/details/${hackathon_id}`))
+        })
+        .then((res) => console.log( res.ok , "demande envoyé" && "demande envoyé" , res ))
         .catch((error) => console.log(error))
     }
 })
 
 const handleSubmit = (e : ChangeEvent<HTMLFormElement>) => {
     e.preventDefault()
-    e.stopPropagation()
         const formData = new FormData() ;
             formData.append('status' , "attente")
             formData.append('motivation' , motivation)
