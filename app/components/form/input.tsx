@@ -17,7 +17,7 @@ export default function FormInput({id , type = "text", value, placeholder, class
 }) {
   return (
     <div className='max-w-xl text-dark-green '>
-      <label className='text-md px-2 font-light' >{label} 
+      <label className='text-xs px-2 font-light' >{label} 
         {required && 
         <span className='text-red-500'>*</span> 
         }

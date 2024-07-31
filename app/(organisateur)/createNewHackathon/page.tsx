@@ -146,7 +146,7 @@ export default function Page() {
                                         value={value.heure_debut}
                                         onChange={handleChange}
                                         placeholder="ex: 2024-05-22"
-                                        label="Heure de fin"
+                                        label="Heure de demarage"
                                     />
                                     {/* </div> */}
                                     {/* <div className="flex gap-2"> */}
