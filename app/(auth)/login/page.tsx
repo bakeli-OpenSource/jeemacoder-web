@@ -20,14 +20,15 @@ export default function Page() {
     password : '',
     remember : false
   })
+  const [error , setError] = useState<string | null>(null)
   const handleChange = (e : ChangeEvent<HTMLInputElement>) => {
     const input = e.currentTarget;
     setValue({...value , [input.id] : input.value})
   }
   const router = useRouter()
-  const onClick = () => router.replace('/dashboard')
   const handleSubmit = async (e : ChangeEvent<HTMLFormElement>) => {
     e.preventDefault()
+    setError(null)
 
     const formData = {
       email: value.email,
@@ -44,9 +45,11 @@ export default function Page() {
       if (res.data.token) {
         localStorage.setItem('authToken', res.data.token);
         console.log("success! you are connected", res.data);
+        router.replace('/dashboard');
       }
     } catch (error) {
-      console.log('echec! connexion échouée', error);
+      setError(' désolé , les information que vous avez ajouté sont incorrect ');
+      console.log("error" , error);
     }
   }
 
@@ -61,6 +64,7 @@ export default function Page() {
         <div className=" m-auto flex flex-col gap-20 justify-center items-center py-10 px-20 rounded-md">
           <form className="w-[420px] " onSubmit={handleSubmit}>
           <h1 className="my-5 text-lg"> Connectez-vous </h1>
+          {error && <div className="text-red-400"> {error} </div> }
             <div className="flex flex-col gap-7">
              <div className="flex flex-col gap-5">
               <FormInput
@@ -83,7 +87,7 @@ export default function Page() {
                     />
 
     </div>
-    <Button onClick={onClick}> Se connecter </Button>
+    <Button> Se connecter </Button>
      <div className="flex flex-col">
           <div>
           vous avez déjà un compte ?

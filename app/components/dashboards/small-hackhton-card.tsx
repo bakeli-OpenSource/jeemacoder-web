@@ -31,7 +31,7 @@ export const SmallHackthonCard = ({
         >
             <div className="flex gap-6 flex-col">
                 <div className="flex gap-3">
-                    <Image src={logo_url || '/default-logo.jpg'}
+                    <Image src={"/" || '/default-logo.jpg'}
                         width={130} 
                         height={100} alt="logo_img"
                         className="border rounded-md max-sm:hidden"

@@ -14,7 +14,7 @@ export const Avatar = ({profil , variante , className} : {profil : {firstname ?:
         <div className="flex flex-col ">
             <span className="text-xs font-semibold">{firstname}{' '}{lastname} </span>
             <span className="text-xs text-[#636364]">{email} </span>
-            <span className="text-xs text-[#636364]">{metier} </span>
+            {/* <span className="text-xs text-[#636364]">{metier} </span> */}
         </div>
     </div>
 }

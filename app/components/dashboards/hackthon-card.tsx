@@ -32,7 +32,7 @@ import hackathonlogoLoader from "@/app/utils/hackathonlogoLoader"
             "border-dark" : theme == "neutre",
             "border-orange " : theme == "orange"
         })}>
-            <div className="w-2 hover:w-4 bg-dark"></div>
+            {/* <div className="w-2 hover:w-4 bg-dark"></div> */}
         <div onClick={() => router.push(`listhackathons/details/${id}?name=${name}`)}
             className={clsx(" p-7 flex flex-col gap-7 " )}>
             <div className="flex gap-10 ">

@@ -1,6 +1,6 @@
 "use client"
 import { Button } from "@/app/components/button";
-import { BanknoteIcon, Calendar, DoorClosed, Globe, LucideUserX, MapPinIcon, SmilePlus, TagsIcon } from "lucide-react"
+import { BanknoteIcon, Calendar, DoorClosed, Globe, MapPinIcon, SmilePlus, TagsIcon } from "lucide-react"
 import { NavBar } from "@/app/components/home/navBar";
 import { getHackathonById } from "@/app/utils/api/data";
 import { useQuery } from "@tanstack/react-query";
@@ -14,7 +14,7 @@ import hackathonlogoLoader from "@/app/utils/hackathonlogoLoader";
 
 export default function Details({params} : {params : {details : string[]}}) {
     const [detailsPath , hackathonId ] = params.details
-    
+
     const {data , isLoading , isError} = useQuery({
         queryFn : async () => await getHackathonById(hackathonId),
         queryKey : ["hackathon"],
@@ -42,7 +42,7 @@ export default function Details({params} : {params : {details : string[]}}) {
                                         className="rounded-lg"
                                     />
                                 <div>
-                                <h1 className={clsx(' "text-3xl font-semibold"' , {
+                                <h1 className={clsx("text-3xl font-semibold" , {
                                     "text-dark-green-hover" : theme == "vert",
                                     "text-orange" : theme == "orange",
                                     "text-dark" : theme == "neutre",
@@ -69,14 +69,14 @@ export default function Details({params} : {params : {details : string[]}}) {
                 <p> Deadline : {date_limite} </p>
             </div>
             <div className="grid grid-cols-2 gap-x-5 gap-y-5">
-                <DetailsCardItem icon={Globe} text="Presentielle"/>
-                <DetailsCardItem icon={MapPinIcon} text={lieu} />
-                <DetailsCardItem icon={ SmilePlus } text={status} />
-                <DetailsCardItem icon={BanknoteIcon} text={prix} />
+                <DetailsCardItem icon={Globe} text="Presentielle"theme={theme}/>
+                <DetailsCardItem icon={MapPinIcon} text={lieu} theme={theme}/>
+                <DetailsCardItem icon={ SmilePlus } text={status} theme={theme}/>
+                <DetailsCardItem icon={BanknoteIcon} text={prix} theme={theme}/>
             </div>
             <div className="flex flex-col gap-5">
-                <DetailsCardItem icon={Calendar} text=" Demarrage: " amount={date_debut} />
-                <DetailsCardItem icon={Calendar} text=" Fin :" amount={date_fin} />
+                <DetailsCardItem icon={Calendar} text=" Demarrage: " amount={date_debut} amountthememounttheme={theme} />
+                <DetailsCardItem icon={Calendar} text=" Fin :" amount={date_fin} amountthememounttheme={theme} />
             </div>
             <div>
                 <TagsIcon className="stroke-1"/>

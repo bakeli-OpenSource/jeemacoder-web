@@ -10,7 +10,6 @@ if (typeof window !== "undefined") {
     authToken = localStorage.getItem('authToken');
   }
 
-    
   export const MotivationPopup = ({hackathon_id , onClose} : {hackathon_id : string , onClose : () => void}) => {
       const [motivation , setMotivation] = useState('')
       const [participation , setParticipation] = useState<string>('chercheur')
@@ -34,6 +33,7 @@ const mutation = useMutation({
 
 const handleSubmit = (e : ChangeEvent<HTMLFormElement>) => {
     e.preventDefault()
+    e.stopPropagation()
         const formData = new FormData() ;
             formData.append('status' , "attente")
             formData.append('motivation' , motivation)
