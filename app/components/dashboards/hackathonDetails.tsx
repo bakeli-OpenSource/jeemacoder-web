@@ -40,7 +40,7 @@ export const HackathonDetails: React.FC<Props> = ({ hackathonId }) => {
 
     const mutation = useMutation({
         mutationFn: async () => {
-            if (!value) return;
+            if (!value) return ;
             await updateHackathon(hackathonId, value);
         },
         onSuccess: () => {
