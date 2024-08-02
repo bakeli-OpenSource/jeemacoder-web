@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { ImgCollpsed } from "./img-collabsed";
 import { Calendar } from "lucide-react";
+import hackathonlogoLoader from "@/app/utils/hackathonlogoLoader";
 
 export const SmallHackthonCard = ({
     hackathonCard,
@@ -31,7 +32,8 @@ export const SmallHackthonCard = ({
         >
             <div className="flex gap-6 flex-col">
                 <div className="flex gap-3">
-                    <Image src={"/" || '/default-logo.jpg'}
+                    <Image src={`${logo_url}`}
+                        loader={hackathonlogoLoader}
                         width={130} 
                         height={100} alt="logo_img"
                         className="border rounded-md max-sm:hidden"
@@ -45,7 +47,8 @@ export const SmallHackthonCard = ({
                     </div>
                 </div>
                 <div className="hidden max-sm:flex gap-5">
-                    <Image src='/hack_logo.jpg'
+                    <Image src={`${logo_url}`}
+                    loader={hackathonlogoLoader}
                         width={60} 
                         height={50} alt="logo_img"
                         className="border rounded-md"

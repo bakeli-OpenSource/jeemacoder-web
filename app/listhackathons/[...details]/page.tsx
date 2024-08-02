@@ -11,6 +11,7 @@ import { MotivationPopup } from "@/app/components/participant/motivation-Popup";
 import Image from "next/image";
 import clsx from "clsx";
 import hackathonlogoLoader from "@/app/utils/hackathonlogoLoader";
+import { DetailsPageSkeletons } from "@/app/components/ui/detailsPgaeSkeletons";
 
 export default function Details({params} : {params : {details : string[]}}) {
     const [detailsPath , hackathonId ] = params.details
@@ -24,11 +25,12 @@ export default function Details({params} : {params : {details : string[]}}) {
     const onClose = () => {setShowModal(!showModal)}
     const {name , logo_url , date_debut , date_limite , structure_organisateur , theme , date_fin , lieu , prix , status , slogan} = data || []
 
-    return (
+    return (<>
         <div>
             <div className="bg-dark z-10 sticky top-0">
                 <NavBar />
             </div>
+        { isLoading ? <DetailsPageSkeletons /> : 
             <div className="max-w-5xl m-auto my-10">
                 <div className="flex gap-10">
                     <div className=" p-4 flex flex-col gap-5">
@@ -92,10 +94,11 @@ export default function Details({params} : {params : {details : string[]}}) {
             <div>
                 prix : {prix}
             </div>
+            </div> }
+            {isError && <div> failed fetching data </div> }
             </div>
             <Modal onClose={onClose} showModal={showModal} className="items-center">
                 <MotivationPopup hackathon_id={hackathonId} onClose={onClose} />
             </Modal>
-        </div>
-    )
+        </>)
 }
