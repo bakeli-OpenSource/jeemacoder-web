@@ -11,5 +11,7 @@ export function useUserContext() {
 
     }
 
+    console.log('user : ',user);
+
     return user
 }

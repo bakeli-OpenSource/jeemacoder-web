@@ -7,14 +7,16 @@ import { Modal } from "@/app/components/modal";
 import { ListItem } from "@/app/components/regular_list";
 import { PlusCircledIcon } from "@radix-ui/react-icons";
 import { useState } from "react";
-import { getHackathons } from "@/app/utils/api/data";
+import { getHackathons, getHackathonsByOrganisateurId } from "@/app/utils/api/data";
 import { useQuery } from "@tanstack/react-query";
 import { SmallHackathonCardSkelethon } from "@/app/components/ui/skeletons";
+import { useUserContext } from "@/app/utils/context";
 
 export default function Page () {
+    const user = useUserContext();
     const [showModal , setShowModal] = useState(false)
     const {data , isLoading , isError} = useQuery({
-        queryFn : async () => await getHackathons(),
+        queryFn : async () => await getHackathonsByOrganisateurId(user.id),
         queryKey : ['hackathons'],
     })
     
