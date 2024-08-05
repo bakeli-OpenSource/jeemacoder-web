@@ -21,7 +21,7 @@ const meshackathon = [
 const links:LinkData[] = [{href : "/dashboard/mes-hackatons" , link : "Projects" , icon : TimerIcon , icon2 : ChevronDownIcon}]
 
 export const SideBar = () => {
-    return (<div className="h-full flex flex-col justify-between max-md:hidden sticky">
+    return (<div className="h-full flex flex-col justify-between max-md:hidden sticky py-5">
         <div>
             <div className="h-20 w-full ">
 

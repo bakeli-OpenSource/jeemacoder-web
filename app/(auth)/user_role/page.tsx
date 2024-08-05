@@ -1,5 +1,5 @@
 "use client"
-import { useUserRole } from "@/app/utils/useUserRole";
+import { useUserRole } from "@/app/utils/hooks";
 import { Button } from "@/app/components/button";
 import { ChevronRightIcon } from "@radix-ui/react-icons";
 import clsx from "clsx";

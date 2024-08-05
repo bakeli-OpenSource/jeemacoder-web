@@ -20,17 +20,17 @@ export type Hackathon = {
 }
 
 export type User = {
-    id: string;
-    firstname: string;
-    lastname: string;
-    pays: string;
-    ville: string;
-    email: string;
-    metier: string;
-    role: string;
-    photo: string;
-    created_at: string;
-    updated_at: string;
+    id?: string;
+    firstname?: string;
+    lastname?: string;
+    pays?: string;
+    ville?: string;
+    email?: string;
+    metier?: string;
+    role?: string;
+    photo?: string;
+    created_at?: string;
+    updated_at?: string;
 };
 
 export type Individuel = {
