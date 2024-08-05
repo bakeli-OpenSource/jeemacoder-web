@@ -8,6 +8,7 @@ import { Hackathon } from "@/app/utils/definitions";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { getHackathonsByHackathonsId, updateHackathon } from "@/app/utils/api/data";
 import { useRouter } from 'next/navigation';
+import hackathonlogoLoader from "@/app/utils/hackathonlogoLoader";
 
 // Définition des props pour le composant
 interface Props {
@@ -63,7 +64,7 @@ export const HackathonDetails: React.FC<Props> = ({ hackathonId }) => {
             <form className="w-full space-y-6" onSubmit={handleSubmit}>
                 <div className="flex items-center gap-5">
                     <div className="w-24 h-24 relative rounded-lg overflow-hidden">
-                        <Image src='/hotelPic.jpg' layout="fill" objectFit="cover" alt="Hackathon Image" />
+                        <Image src={`${value.logo_url}`} loader={hackathonlogoLoader} layout="fill" objectFit="cover" alt="Hackathon Image" />
                     </div>
                     <div className="flex items-center gap-2 w-full">
                         <FormInput

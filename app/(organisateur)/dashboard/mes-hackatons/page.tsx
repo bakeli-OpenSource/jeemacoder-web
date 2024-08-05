@@ -5,10 +5,12 @@ import { SmallHackathonCardSkelethon } from "@/app/components/ui/skeletons";
 import { useQuery } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import { SmallHackthonCard } from "@/app/components/dashboards/small-hackhton-card";
+import { useUserContext } from "@/app/utils/context";
 
 export default function Page() {
+    const user = useUserContext();
     const { data, isLoading, isError } = useQuery({
-        queryFn: async () => await getHackathonsByOrganisateurId(4),
+        queryFn: async () => await getHackathonsByOrganisateurId(user.id),
         queryKey: ["hackathons"],
     });
 
