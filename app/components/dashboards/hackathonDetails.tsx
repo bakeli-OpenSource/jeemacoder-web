@@ -44,7 +44,7 @@ export const HackathonDetails: React.FC<Props> = ({ hackathonId }) => {
             await updateHackathon(hackathonId, value);
         },
         onSuccess: () => {
-            router.refresh(); // Optionnellement rafraîchir la page ou rediriger
+            router.refresh(); 
         },
     });
 
@@ -56,7 +56,7 @@ export const HackathonDetails: React.FC<Props> = ({ hackathonId }) => {
     if (isLoading) return <div>Loading...</div>;
     if (isError) return <div>Error loading hackathon details</div>;
 
-    if (!value) return null; // Assurez-vous que la valeur n'est pas null
+    if (!value) return null; 
 
     return (
         <div className="p-8 bg-white shadow-lg rounded-lg">

@@ -1,5 +1,5 @@
 "use client"
-import { getHackathons } from "@/app/utils/api/data";
+import { getHackathonsByOrganisateurId } from "@/app/utils/api/data";
 import { ListItem } from "@/app/components/regular_list_hackathon";
 import { SmallHackathonCardSkelethon } from "@/app/components/ui/skeletons";
 import { useQuery } from "@tanstack/react-query";
@@ -8,7 +8,7 @@ import { SmallHackthonCard } from "@/app/components/dashboards/small-hackhton-ca
 
 export default function Page() {
     const { data, isLoading, isError } = useQuery({
-        queryFn: async () => await getHackathons(),
+        queryFn: async () => await getHackathonsByOrganisateurId(4),
         queryKey: ["hackathons"],
     });
 
