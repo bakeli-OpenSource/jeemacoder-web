@@ -14,10 +14,10 @@ export const NavLinks = ({links} : {
     const pathName = usePathname()
 
     return <ul className="">
-                    <li className={clsx("flex gap-6 w-full rounded-lg items-center hover:bg-white font-medium" , 
+                    <li className={clsx("flex gap-6 w-full py-2 px-4 rounded-md items-center hover:bg-white font-medium" , 
                     {
                         "bg-white border-muted-foreground border  text-[#FF9700] " : pathName == href})}>
-                    <Link href={href} className="text-sm w-full flex p-3 px-4 gap-5 items-center ">
+                    <Link href={href} className="text-xs w-full flex gap-5 items-center ">
                     
                     {Icon ? <Icon /> : null}
                     
