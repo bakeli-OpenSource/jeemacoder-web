@@ -22,7 +22,7 @@ export default function Page() {
     const [value , setValue] = useState<Hackathon>({
         name : '', date_debut : '2024-07-02' , heure_debut : "08:00" , heure_fin : "20h:00",
         date_fin : '2024-07-02', date_limite : '2024-07-02', slogan : '' , lieu : '', prix : '',
-        structure_organisateur : ''
+        structure_organisateur : '',logo_url:'',theme:'',description:''
     })
     const [description , setDescription] = useState('une descrpton de votre hackathon expicative une descrpton de votre hackathon expicativeune descrpton de votre hackathon expicativeune descrpton de votre hackathon expicativeune descrpton de votre hackathon expicative une descrpton de votre hackathon expicative')
     const [theme , setTheme] = useState('vert')
