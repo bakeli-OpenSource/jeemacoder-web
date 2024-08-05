@@ -16,6 +16,8 @@ export type Hackathon = {
     prix : string ,
     heure_debut: string,
     heure_fin : string,
+    description:string,
+    theme : string,
 
 }
 
