@@ -48,7 +48,12 @@ export default function Page() {
       if (res.data.token) {
         localStorage.setItem('authToken', res.data.token);
         console.log("success! you are connected", res.data);
-        router.replace('/dashboard');
+        if(res.data.Utilisateur.role === "organisateur"){
+          router.replace('/dashboard');
+        }else{
+          router.replace('/espaceParticipant');
+        }
+      
       }
     } catch (error) {
       setError({genrale : ' désolé , les information que vous avez ajouté sont incorrect'});
@@ -99,7 +104,7 @@ export default function Page() {
               <span className="font-semibold underline">S&apos;inscrire</span>
           </Link>
         </div>
-        <Link className="text-red-500" href="/fgpwd">
+        <Link className="text-red-500" href="/resetPassword">
             <span className="font-semibold underline">Mot de pass oublié</span>
         </Link>
       </div>
