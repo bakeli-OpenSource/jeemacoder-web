@@ -1,11 +1,18 @@
-import { NavBar } from "@/app/components/patricipants/navBar";
+import { NavBar , SideBar } from "@/app/components/participant/navBar";
 import React from "react";
 
 export default function Layout({children} : {children : React.ReactNode}) {
     return (
-        <div>
-            <div className="h-9 border flex flex-start items-center px-5"><NavBar /> </div>
-            <div className="flex flex-start items-center max-w-3xl border m-auto"> {children} </div>
+        <div className="h-screen">
+            <div className="h-9 border-b flex flex-start items-center px-5">
+                <NavBar /> 
+            </div>
+            <div className="flex gap-5 h-full">
+                <div className="border-r px-2">
+                    <SideBar />
+                </div>
+                <div className=""> {children} </div>
+            </div>
         </div>
     )
 }
