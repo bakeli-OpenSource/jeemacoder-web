@@ -167,7 +167,7 @@ const handleSubmit = (e : ChangeEvent<HTMLFormElement> ) => {
     {
       role === "organisateur" ?
       <div> 
-        <Image src="/org_illustrator.jpg" width={420} height={300} alt="" />
+        <Image src="/img.jpg" width={420} height={300} alt="" />
       </div> :
       <div> </div>
     }
