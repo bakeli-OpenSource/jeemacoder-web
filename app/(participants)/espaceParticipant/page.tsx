@@ -6,18 +6,26 @@ import Image from "next/image";
 import hackathonlogoLoader from '@/app/utils/hackathonlogoLoader';
 import { useUserContext } from '@/app/utils/context';
 
+interface HackathonData {
+  logo_url: string;
+  
+}
+
 export default function Page() {
     const user = useUserContext();
-    const [data, setData] = useState(null);
+    const [data, setData] = useState<HackathonData | null>(null);
     const [isLoading, setIsLoading] = useState(true);
     const [isError, setIsError] = useState(false);
 
     useEffect(() => {
         const fetchData = async () => {
-            if (!user) {
-                console.log('User not loaded yet');
+            if (!user || !user.id) {
+                console.log('User not loaded or user ID is undefined');
+                setIsError(true);
+                setIsLoading(false);
                 return;
             }
+
             try {
                 console.log("User ID : ", user.id);
                 
@@ -56,19 +64,20 @@ export default function Page() {
     return (
         <div>
             <h1 className="my-5">Mes projets</h1>
-            <div className="w-80 h-32 border rounded-md bg-gradient-radial-home flex items-center text-white justify-center font-bold">
-                <Image
-                    src={data.logo_url}
-                    loader={hackathonlogoLoader}
-                    alt='logo hackathon'
-                    width={320} // Remplacez par la largeur réelle de l'image
-                    height={180} // Remplacez par la hauteur réelle de l'image
-                    className='w-full'
-                />
-            </div>
-            {data && (
-                <div>
-                    {/* Affichez les données récupérées ici */}
+            {data.logo_url ? (
+                <div className="w-80 h-32 border rounded-md bg-gradient-radial-home flex items-center text-white justify-center font-bold">
+                    <Image
+                        src={data.logo_url}
+                        loader={hackathonlogoLoader}
+                        alt='logo hackathon'
+                        width={320}
+                        height={180}
+                        className='w-full'
+                    />
+                </div>
+            ) : (
+                <div className="w-80 h-32 border rounded-md bg-gradient-radial-home flex items-center text-white justify-center font-bold">
+                    <p>Aucun logo disponible</p>
                 </div>
             )}
         </div>

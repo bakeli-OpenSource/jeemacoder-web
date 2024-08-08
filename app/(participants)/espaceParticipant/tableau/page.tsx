@@ -1,9 +1,11 @@
-export default function Page() {
-    return (
-        <div className="font-mono">
-            <div className="">
-                <span className="py-5">ProjectName</span>
-            </div>
-        </div>
-    )
+// pages/kanban.tsx
+
+import KanbanBoard from "./KanbanBoard/page";
+
+export default function KanbanPage() {
+  return (
+    <div className="">
+      <KanbanBoard />
+    </div>
+  );
 }
