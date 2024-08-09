@@ -1,7 +1,7 @@
 import React from 'react';
-import ChatHeader from './ChatHeader/page';
-import ChatMessage from './ChatMessage/page';
-import MessageInput from './MessageInput/page';
+import ChatHeader from './ChatHeader/ChatHeader';
+import ChatMessage from './ChatMessage/ChatMessage';
+import MessageInput from './MessageInput/MessageInput';
 
 
 const ChatPage: React.FC = () => {

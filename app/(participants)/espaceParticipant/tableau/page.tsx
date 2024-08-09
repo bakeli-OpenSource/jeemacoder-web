@@ -1,6 +1,6 @@
 // pages/kanban.tsx
 
-import KanbanBoard from "./KanbanBoard/page";
+import KanbanBoard from "./KanbanBoard/KanbanBoard";
 
 export default function KanbanPage() {
   return (

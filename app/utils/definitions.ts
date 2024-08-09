@@ -45,3 +45,8 @@ export type Individuel = {
     created_at: string; 
     updated_at: string; 
 };
+
+export type ParticipantsResponse = {
+    success: boolean;
+    Individuels: Individuel[];
+  };
