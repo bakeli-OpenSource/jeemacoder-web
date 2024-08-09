@@ -1,14 +1,14 @@
 import { Cross1Icon, CheckIcon } from "@radix-ui/react-icons";
 import { useState, useEffect } from "react";
 import { getParticipants, approveParticipant, rejectParticipant } from "@/app/utils/api/data";
-import { Individuel } from '@/app/utils/definitions'; // Assurez-vous que ce chemin est correct
+import { Individuel, ParticipantsResponse } from '@/app/utils/definitions'; // Assurez-vous que ce chemin est correct
 import Image from "next/image";
 
 interface Props {
     hackathonId: string;
 }
 
-export const EnrolementParticipants: React.FC<Props> = ({ hackathonId } : {hackathonId : string}) => {
+export const EnrolementParticipants: React.FC<Props> = ({ hackathonId }) => {
     const [participants, setParticipants] = useState<Individuel[]>([]);
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 8;
@@ -16,8 +16,10 @@ export const EnrolementParticipants: React.FC<Props> = ({ hackathonId } : {hacka
     useEffect(() => {
         const fetchParticipants = async () => {
             try {
-                const response = await getParticipants(hackathonId);
+                // Assurez-vous que la réponse est de type ParticipantsResponse
+                const response: ParticipantsResponse = await getParticipants(hackathonId);
                 console.log("Data received from API:", response);
+                
                 if (response.success && Array.isArray(response.Individuels)) {
                     setParticipants(response.Individuels);
                 } else {

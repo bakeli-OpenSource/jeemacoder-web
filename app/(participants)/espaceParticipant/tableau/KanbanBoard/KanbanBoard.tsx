@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { DragDropContext, DropResult, DragStart } from 'react-beautiful-dnd';
-import Column from '../TaskColumn/page';
+import Column from '../TaskColumn/Column';
 
 type Task = {
   id: string;
@@ -63,7 +63,7 @@ const KanbanBoard: React.FC = () => {
     
     if (!destination) return;
 
-    // Vérifier si la tâche est déplacée dans la même colonne et à la même position
+    // Vérifier si la tâche est déplacée dans la même colonne et à la même position comme ça je le retourne à sa place
     if (source.droppableId === destination.droppableId && source.index === destination.index) {
       return;
     }

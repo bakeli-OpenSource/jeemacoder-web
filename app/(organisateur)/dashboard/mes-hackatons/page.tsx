@@ -1,4 +1,5 @@
-"use client"
+"use client";
+
 import { getHackathonsByOrganisateurId } from "@/app/utils/api/data";
 import { ListItem } from "@/app/components/regular_list_hackathon";
 import { SmallHackathonCardSkelethon } from "@/app/components/ui/skeletons";
@@ -9,13 +10,22 @@ import { useUserContext } from "@/app/utils/context";
 
 export default function Page() {
     const user = useUserContext();
+    const router = useRouter();
+
+    // Verifiez que user.id est défini avant de faire la requête
     const { data, isLoading, isError } = useQuery({
-        queryFn: async () => await getHackathonsByOrganisateurId(user.id),
+        queryFn: async () => {
+            if (user.id) {
+                return await getHackathonsByOrganisateurId(user.id);
+            } else {
+                throw new Error("User ID is undefined");
+            }
+        },
         queryKey: ["hackathons"],
+        enabled: !!user?.id // c'est pour m'assurez que la requête ne se lance que si user.id est défini
     });
 
 
-    const router = useRouter();
 
     const handleCardClick = (id: string) => {
         router.push(`/dashboard/mes-hackatons/details/${id}`);

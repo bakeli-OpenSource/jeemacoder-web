@@ -211,9 +211,9 @@ export const HackathonDetails: React.FC<Props> = ({ hackathonId }) => {
                 <Button 
                     type="submit" 
                     className="mt-4 bg-orange-400"
-                    disabled={mutation.isLoading}
+                    disabled={isLoading}
                 >
-                    {mutation.isLoading ? 'Enregistrement...' : 'Modifier'}
+                    {isLoading ? 'Enregistrement...' : 'Modifier'}
                 </Button>
             </form>
         </div>
