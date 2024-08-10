@@ -9,6 +9,7 @@ import { useQuery, useMutation } from "@tanstack/react-query";
 import { getHackathonsByHackathonsId, updateHackathon } from "@/app/utils/api/data";
 import { useRouter } from 'next/navigation';
 import hackathonlogoLoader from "@/app/utils/hackathonlogoLoader";
+import { Tags } from "./tags";
 
 // Définition des props pour le composant
 interface Props {
@@ -208,6 +209,11 @@ export const HackathonDetails: React.FC<Props> = ({ hackathonId }) => {
                         </select>
                     </div>
                 </div>
+                <div className="flex gap-5 max-w-2xl border">
+                    <Tags hackathonId={hackathonId} />
+                    <div className="p-2 border"></div>
+                </div>
+
                 <Button 
                     type="submit" 
                     className="mt-4 bg-orange-400"
