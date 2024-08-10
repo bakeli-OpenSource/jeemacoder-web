@@ -1,6 +1,6 @@
 import { PersonIcon } from "@radix-ui/react-icons"
 import clsx from "clsx"
-import { User } from "../utils/definitions"
+import { User } from "../app/utils/definitions"
 
 export const Avatar = ({profil , variante , className} : {profil : User , 
     variante ?: "big" | "small" ,

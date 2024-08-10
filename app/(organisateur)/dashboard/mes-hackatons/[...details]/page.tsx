@@ -1,8 +1,8 @@
 "use client";
 import { useState } from "react";
-import { HackathonDetails } from "@/app/components/dashboards/hackathonDetails";
-import { EnrolementParticipants } from "@/app/components/dashboards/enrolementParticipants";
-import { GestionParticipants } from "@/app/components/dashboards/gestionParticipants"; // Add this import
+import { HackathonDetails } from "@/components/dashboards/hackathonDetails";
+import { EnrolementParticipants } from "@/components/dashboards/enrolementParticipants";
+import { GestionParticipants } from "@/components/dashboards/gestionParticipants"; // Add this import
 
 export default function Page({params} : {params : {details : string[]}}) {
     const [detailsPath , hackathonId ] = params.details

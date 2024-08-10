@@ -49,7 +49,6 @@ export const HackathonDetails: React.FC<Props> = ({ hackathonId }) => {
             router.refresh(); 
         },
     });
-
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         mutation.mutate();
@@ -209,10 +208,7 @@ export const HackathonDetails: React.FC<Props> = ({ hackathonId }) => {
                         </select>
                     </div>
                 </div>
-                <div className="flex gap-5 max-w-2xl border">
-                    <Tags hackathonId={hackathonId} />
-                    <div className="p-2 border"></div>
-                </div>
+                
 
                 <Button 
                     type="submit" 
@@ -222,6 +218,8 @@ export const HackathonDetails: React.FC<Props> = ({ hackathonId }) => {
                     {isLoading ? 'Enregistrement...' : 'Modifier'}
                 </Button>
             </form>
+                <Tags hackathonId={hackathonId} />
+            
         </div>
     );
 };

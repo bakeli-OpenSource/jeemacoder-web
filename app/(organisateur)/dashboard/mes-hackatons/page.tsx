@@ -1,11 +1,11 @@
 "use client";
 
 import { getHackathonsByOrganisateurId } from "@/app/utils/api/data";
-import { ListItem } from "@/app/components/regular_list_hackathon";
-import { SmallHackathonCardSkelethon } from "@/app/components/ui/skeletons";
+import { ListItem } from "@/components/regular_list_hackathon";
+import { SmallHackathonCardSkelethon } from "@/components/ui/skeletons";
 import { useQuery } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
-import { SmallHackthonCard } from "@/app/components/dashboards/small-hackhton-card";
+import { SmallHackthonCard } from "@/components/dashboards/small-hackhton-card";
 import { useUserContext } from "@/app/utils/context";
 
 export default function Page() {

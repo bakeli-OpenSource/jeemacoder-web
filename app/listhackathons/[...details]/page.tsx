@@ -1,17 +1,17 @@
 "use client"
-import { Button } from "@/app/components/button";
+import { Button } from "@/components/button";
 import { BanknoteIcon, Calendar, DoorClosed, Globe, MapPinIcon, SmilePlus, TagsIcon } from "lucide-react"
-import { NavBar } from "@/app/components/home/navBar";
+import { NavBar } from "@/components/home/navBar";
 import { getHackathonById } from "@/app/utils/api/data";
 import { useQuery } from "@tanstack/react-query";
-import { DetailsCardItem } from "@/app/components/Card";
-import { Modal } from "@/app/components/modal";
+import { DetailsCardItem } from "@/components/Card";
+import { Modal } from "@/components/modal";
 import { useState } from "react";
-import { MotivationPopup } from "@/app/components/participant/motivation-Popup";
+import { MotivationPopup } from "@/components/participant/motivation-Popup";
 import Image from "next/image";
 import clsx from "clsx";
 import hackathonlogoLoader from "@/app/utils/hackathonlogoLoader";
-import { DetailsPageSkeletons } from "@/app/components/ui/detailsPgaeSkeletons";
+import { DetailsPageSkeletons } from "@/components/ui/detailsPgaeSkeletons";
 
 export default function Details({params} : {params : {details : string[]}}) {
     const [detailsPath , hackathonId ] = params.details

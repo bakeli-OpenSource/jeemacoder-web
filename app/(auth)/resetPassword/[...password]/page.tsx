@@ -2,8 +2,8 @@
 
 import { useRouter } from 'next/navigation';
 import { useEffect, useState, ChangeEvent } from 'react';
-import { Button } from "@/app/components/form/button";
-import FormInput from "@/app/components/form/input";
+import { Button } from "@/components/form/button";
+import FormInput from "@/components/form/input";
 import axios from "axios";
 import { Undo2 } from "lucide-react";
 import Link from "next/link";

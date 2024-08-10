@@ -1,5 +1,5 @@
 "use client";
-import { NavBar, SideBar } from "@/app/components/participant/navBar";
+import { NavBar, SideBar } from "@/components/participant/navBar";
 import { getUser } from "@/app/utils/api/auth";
 import { UserContext } from "@/app/utils/context";
 import { useQuery } from "@tanstack/react-query";

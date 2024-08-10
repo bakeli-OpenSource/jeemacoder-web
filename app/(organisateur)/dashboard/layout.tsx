@@ -1,7 +1,7 @@
 "use client"
-import { Container } from "@/app/components/container";
-import { SideBar } from "@/app/components/dashboards/sideBar";
-import { openSans, roboto } from "@/app/components/ui/fonts";
+import { Container } from "@/components/container";
+import { SideBar } from "@/components/dashboards/sideBar";
+import { openSans, roboto } from "@/components/ui/fonts";
 import { getUser } from "@/app/utils/api/auth";
 import { UserContext } from "@/app/utils/context"
 import { useQuery } from "@tanstack/react-query";
