@@ -1,13 +1,22 @@
 "use client"
 import { useUserRole } from "@/app/utils/hooks";
-import { Button } from "@/app/components/button";
+import { Button } from "@/components/button";
 import { ChevronRightIcon } from "@radix-ui/react-icons";
-import clsx from "clsx";
 import Link from "next/link";
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import { Undo2 } from "lucide-react";
 
-export default function UserRole() {
+export default function Page() {
+    return (
+        <div>
+            <Suspense fallback={<div>Loading... </div>}>
+                <UserRole />
+            </Suspense>
+        </div>
+    )
+}   
+
+function UserRole() {
     const  organisateur = 'organisateur'
     const participant = 'participant'
   const validation = useUserRole()?.toString()

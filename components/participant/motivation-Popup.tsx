@@ -23,10 +23,13 @@ const mutation = useMutation({
                 "Contente-type" : "Application/json",
                 "authorization" : `Bearer ${authToken} ` 
             },
-            body : formData
+            body : formData ,
+            
         })
         .then((res) => console.log( res.ok , "demande envoyé" && "demande envoyé" , res ))
         .catch((error) => console.log(error))
+    }, onSuccess : () => {
+        setMotivation("")
     }
 })
 
@@ -58,19 +61,19 @@ const handleSubmit = (e : ChangeEvent<HTMLFormElement>) => {
             onChange={(e : ChangeEvent<HTMLTextAreaElement>) => { setMotivation(e.target.value) }} 
             />
         <div className="flex gap-3">
-            <CheckboxEl label="#ChercheUneEquipe" checked={chercheur} onClick={() => {
+            <CheckboxEl label="Je cherche une équipe" checked={chercheur} onClick={() => {
                 setChercheur(true);
                 setEquipeDeja(false);
                 setSolo(false)
                 setParticipation('chercheur')
             }} />
-            <CheckboxEl label="#J'aiDejaUneEquipe" checked={equipeDeja} onClick={() => {
+            <CheckboxEl label="J'ai deja Une équipe" checked={equipeDeja} onClick={() => {
                 setEquipeDeja(true)
                 setSolo(false)
                 setChercheur(false);
                 setParticipation('equipaDeja')
             }} />
-            <CheckboxEl label="#JeSuisEnSolo" checked={solo} onClick={() => {
+            <CheckboxEl label="Je suis en solo" checked={solo} onClick={() => {
                 setSolo(true)
                 setChercheur(false);
                 setEquipeDeja(false);

@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from 'react';
-import { SmallHackthonCard } from "@/app/components/dashboards/small-hackhton-card";
+import { SmallHackthonCard } from "@/components/dashboards/small-hackhton-card";
 import { getUserHackathon, getUserIndividuel } from "@/app/utils/api/dataParticipant";
 import Image from "next/image";
 import hackathonlogoLoader from '@/app/utils/hackathonlogoLoader';

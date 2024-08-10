@@ -9,6 +9,7 @@ import { useQuery, useMutation } from "@tanstack/react-query";
 import { getHackathonsByHackathonsId, updateHackathon } from "@/app/utils/api/data";
 import { useRouter } from 'next/navigation';
 import hackathonlogoLoader from "@/app/utils/hackathonlogoLoader";
+import { Tags } from "./tags";
 
 // Définition des props pour le composant
 interface Props {
@@ -48,7 +49,6 @@ export const HackathonDetails: React.FC<Props> = ({ hackathonId }) => {
             router.refresh(); 
         },
     });
-
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         mutation.mutate();
@@ -208,6 +208,8 @@ export const HackathonDetails: React.FC<Props> = ({ hackathonId }) => {
                         </select>
                     </div>
                 </div>
+                
+
                 <Button 
                     type="submit" 
                     className="mt-4 bg-orange-400"
@@ -216,6 +218,8 @@ export const HackathonDetails: React.FC<Props> = ({ hackathonId }) => {
                     {isLoading ? 'Enregistrement...' : 'Modifier'}
                 </Button>
             </form>
+                <Tags hackathonId={hackathonId} />
+            
         </div>
     );
 };

@@ -1,8 +1,8 @@
 "use client"
 import { Hackathon } from "@/app/utils/definitions";
-import { Avatar } from "@/app/components/avatar";
-import { Button } from "@/app/components/form/button";
-import FormInput from "@/app/components/form/input";
+import { Avatar } from "@/components/avatar";
+import { Button } from "@/components/form/button";
+import FormInput from "@/components/form/input";
 import { useMutation } from "@tanstack/react-query";
 import { ChangeEvent, useState } from "react";
 import clsx from "clsx";
@@ -10,7 +10,7 @@ import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { Undo2, Upload } from "lucide-react";
 import Link from "next/link";
-import { Modal, YesOrNoModal } from "@/app/components/modal";
+import { Modal, YesOrNoModal } from "@/components/modal";
 let authToken: string | null = null;
 if (typeof window !== "undefined") {
     authToken = localStorage.getItem('authToken');
