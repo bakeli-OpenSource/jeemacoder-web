@@ -1,6 +1,6 @@
 import { useMutation } from "@tanstack/react-query"
 import { ChangeEvent } from "react"
-import { Hackathon, Individuel } from "../definitions";
+import { Hackathon, ParticipantsResponse } from "../definitions";
 let authToken = null;
 if (typeof window !== "undefined") {
     authToken = localStorage.getItem('authToken');
@@ -109,7 +109,7 @@ export const updateHackathon = async (id: string, updatedData: Partial<Hackathon
     return response.json();
 };
 
-export const getParticipants = async (hackathonId: string): Promise<Individuel[]> => {
+export const getParticipants = async (hackathonId: string): Promise<ParticipantsResponse> => {
     const response = await fetch(`http://localhost:8000/api/indiv/index/${hackathonId}`, {
         method: 'GET',
         headers: {
@@ -130,7 +130,7 @@ export const getParticipants = async (hackathonId: string): Promise<Individuel[]
     }
 
     // Retourne les données en format JSON
-    return response.json();
+    return response.json(); // Assurez-vous que la structure de la réponse correspond à ParticipantsResponse
 };
 
 export const approveParticipant = async (id: string) => {

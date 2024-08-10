@@ -7,7 +7,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { Undo2 } from "lucide-react";
 
-export default function Page() {
+export default function UserRole() {
     const  organisateur = 'organisateur'
     const participant = 'participant'
   const validation = useUserRole()?.toString()

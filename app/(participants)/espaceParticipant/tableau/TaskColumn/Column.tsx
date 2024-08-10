@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { Draggable, Droppable, DraggableProvided, DraggableStateSnapshot, DroppableProvided } from 'react-beautiful-dnd';
-import TaskCard from '../TaskCard/page';
+import TaskCard from '../TaskCard/TaskCard';
 import { FiFilter } from 'react-icons/fi';
 
 interface ColumnProps {
