@@ -91,21 +91,22 @@ export const getHackathonById = async (hackathonId : string) => {
         console.log( "fetch failed" , error);
     }
 }
-export const getTags = async () => {
+
+export const getTags = async ( hackathonId : string) => {
     const options = {
         method: "GET",
         headers: {
-            "accept": "application/json",
             "Authorization": `Bearer ${authToken}`
         }}
 
         try{
-            const response = await fetch('http://localhost:8000/api/tag/index' , options)
+            const response = await fetch(`http://localhost:8000/api/tag/all/${hackathonId}` , options)
             if (!response.ok) {
                 throw new Error(`HTTP error! Status: ${response.status}`);
             }
             const data = response.json()
             return data
+            
         }catch(error) {
             console.log(error , "fecthing data failed");
         }
