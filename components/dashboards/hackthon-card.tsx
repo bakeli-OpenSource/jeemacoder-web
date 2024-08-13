@@ -75,16 +75,16 @@ import { ListItem } from "../regular_list"
                     <DetailsCardItem icon={ SmilePlus } text={status} />
                     <div>
                         <TagsIcon className="stroke-1"/>
-                        <div className="grid grid-cols-2 gap-2">
-                        {isLoading ? <div>Loading</div> : 
-                        <ListItem 
-                            items={data || []}
-                            resourcename="tag"
-                            component={TagElement}
-                            className=""
-                        />
-                        }
-                    </div>
+                        {/* <div className="grid grid-cols-2 gap-2">
+                        {isLoading && <p>Chargement...</p>}
+                        {!isLoading && !isError && data && (
+                        <ListItem
+                        items={data}
+                        resourcename="tag"
+                        component={TagElement}
+                        className="flex"
+                        /> )}
+                    </div> */}
             </div>
                 </div>
             </div>
