@@ -12,12 +12,15 @@ if (typeof window !== "undefined") {
 
   export const MotivationPopup = ({hackathon_id , onClose} : {hackathon_id : string , onClose : () => void}) => {
       const [motivation , setMotivation] = useState('')
-      const [participation , setParticipation] = useState<string>('chercheur')
-      
+      const [participation , setParticipation] = useState<string>('solo')
+      const [solo , setSolo] = useState<boolean>(false)
+      const [equipeDeja , setEquipeDeja] = useState<boolean>(false)
+      const [equipeName , setEquipeName ] = useState('')
+
       const router = useRouter()
 const mutation = useMutation({
     mutationFn : async (formData : BodyInit) => {
-        return await fetch('http://localhost:8000/api/indiv/create' , {
+        return await fetch( !equipeDeja ? 'http://localhost:8000/api/indiv/create' : "http://localhost:8000/api/equipe/create" , {
             method : 'POST',
             headers : {
                 "Contente-type" : "Application/json",
@@ -30,24 +33,49 @@ const mutation = useMutation({
         .catch((error) => console.log(error))
     }, onSuccess : () => {
         setMotivation("")
+        setEquipeName('')
+    }
+})
+const mutationMenbreEquipe = useMutation({
+    mutationFn : async (formData : BodyInit) => {
+        return await fetch("http://localhost:8000/api/membre/add" , {
+            method : 'POST',
+            headers : {
+                "Contente-type" : "Application/json",
+                "authorization" : `Bearer ${authToken} ` 
+            },
+            body : formData ,
+            
+        })
+        .then((res) => console.log( res.ok , "demande envoyé" && "demande envoyé" , res ))
+        .catch((error) => console.log(error))
+    }, onSuccess : () => {
+        setMotivation("")
+        setEquipeName('')
     }
 })
 
 const handleSubmit = (e : ChangeEvent<HTMLFormElement>) => {
     e.preventDefault()
-        const formData = new FormData() ;
-            formData.append('status' , "attente")
+    const formData = new FormData() ;
+    const formDataMenbreEquipe = new FormData()
+
+            formData.append('status' , "en attente")
             formData.append('motivation' , motivation)
-            formData.append('participation' , participation)
             formData.append('hackathon_id' , hackathon_id)
-            mutation.mutate(formData)
+            if(equipeDeja){
+                formData.append('name' ,  equipeName )
+            }
+            
+            formDataMenbreEquipe.append('type_member' , 'chef')
+            formDataMenbreEquipe.append('equipe_id' , "1")
+
+            mutation.mutate( formData )
+            mutationMenbreEquipe.mutate(formDataMenbreEquipe)
             
             // for(let [key , value] of formData.entries()) {
                 // console.log(`${key} : ${value}`)}
-            }
-        const [chercheur , setChercheur] = useState<boolean>(true)
-        const [solo , setSolo] = useState<boolean>(false)
-        const [equipeDeja , setEquipeDeja] = useState<boolean>(false)
+    }
         
         
     return (
@@ -61,25 +89,27 @@ const handleSubmit = (e : ChangeEvent<HTMLFormElement>) => {
             onChange={(e : ChangeEvent<HTMLTextAreaElement>) => { setMotivation(e.target.value) }} 
             />
         <div className="flex gap-3">
-            <CheckboxEl label="Je cherche une équipe" checked={chercheur} onClick={() => {
-                setChercheur(true);
-                setEquipeDeja(false);
-                setSolo(false)
-                setParticipation('chercheur')
-            }} />
+           
             <CheckboxEl label="J'ai deja Une équipe" checked={equipeDeja} onClick={() => {
                 setEquipeDeja(true)
                 setSolo(false)
-                setChercheur(false);
-                setParticipation('equipaDeja')
+                setParticipation('equipeDeja')
             }} />
             <CheckboxEl label="Je suis en solo" checked={solo} onClick={() => {
                 setSolo(true)
-                setChercheur(false);
                 setEquipeDeja(false);
                 setParticipation('solo')
             }} />
         </div>
+        {
+            equipeDeja && <div className="w-full ">
+            <div className="flex flex-col">
+                <label className="text-xs">nom de votre équipe</label>
+                <input value={equipeName} onChange={(e : ChangeEvent<HTMLInputElement>) => {setEquipeName(e.target.value)}}
+                type="text" className="border outline-none text-xs px-2 py-1 rounded-md w-60" />
+            </div>
+        </div>
+        }
 
             <Button types="button" type="submit" size="small" className="bg-dark text-white ">
                 Envoyer
