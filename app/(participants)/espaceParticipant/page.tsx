@@ -63,9 +63,9 @@ export default function Page() {
 
     return (
         <div>
-            <h1 className="my-5">Mes projets</h1>
+            <h1 className="text-2xl font-bold text-gray-800">Mes projets</h1>
             {data.logo_url ? (
-                <div className="w-80 h-32 border rounded-md bg-gradient-radial-home flex items-center text-white justify-center font-bold">
+                <div className="w-80 h-32 flex items-center text-white justify-center font-bold">
                     <Image
                         src={data.logo_url}
                         loader={hackathonlogoLoader}
