@@ -3,13 +3,15 @@ import { ChangeEvent, useState } from "react";
 import { Plus } from "lucide-react";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { getTags } from "@/app/utils/api/data";
+import { ListItem } from "../regular_list";
+import { TagElement } from "./hackthon-card";
 
 let authToken: string | null = null;
 if (typeof window !== "undefined") {
     authToken = localStorage.getItem('authToken');
   }
 type Value = {hackathonId : string , tagName : string}
-export const Tags = ({hackathonId} : {hackathonId : string} ) => {
+export const Tags = ({hackathonId} : {hackathonId : any}) => {
 
 const [value , setValue ] = useState<Value>({
     tagName : "" , hackathonId : hackathonId
@@ -36,9 +38,11 @@ const [value , setValue ] = useState<Value>({
         }
     })
     const {data , isLoading , isError} = useQuery({
-        queryFn : async () => await getTags(),
-        queryKey : ["tag"]
+        queryFn : async () => await getTags(hackathonId),
+        queryKey : ["tags" , hackathonId]
     })
+    
+
     const onSubmit = (e : React.FormEvent) => {
         e.preventDefault()
         const formData = new FormData()
@@ -70,7 +74,19 @@ const [value , setValue ] = useState<Value>({
                 </div>
             </form>
         </div>
-        
+        <div className="border p-1 rounded-md">
+            <span className="text-xs ">vos tags : </span>
+            {isLoading && <p>Chargement...</p>}
+                {!isLoading && !isError && data && (
+                    <ListItem
+                        items={data}
+                        resourcename="tag"
+                        component={TagElement}
+                        className="flex"
+                    />
+                )}
+                {isError && <p>Erreur lors du chargement des tags.</p>}
+        </div>
     </div>
     )
 }

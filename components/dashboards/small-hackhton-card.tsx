@@ -27,42 +27,23 @@ export const SmallHackthonCard = ({
     
     return (
         <div 
-            className="w-80 max-sm:h-60 bg-light-orange border rounded-xl p-4 flex flex-col justify-between cursor-pointer" 
+            className="max-w-sm max-sm:h-60 bg-light-orange border rounded-xl p-4 flex justify-between cursor-pointer gap-5" 
             onClick={onClick}  // Ajout du gestionnaire de clic
         >
-            <div className="flex gap-6 flex-col">
-                <div className="flex gap-3">
-                    <Image src={`${logo_url}`}
-                        loader={hackathonlogoLoader}
-                        width={130} 
-                        height={100} alt="logo_img"
-                        className="border rounded-md max-sm:hidden"
-                    />
-                    <div>
-                        <div className="flex items-center">
-                            <Calendar stroke="1" />
-                            <p className="mb-2 font-mono text-xs">{date_debut}</p>
-                        </div>
-                        <p className="flex font-bold">{status}</p>
-                    </div>
-                </div>
-                <div className="hidden max-sm:flex gap-5">
-                    <Image src={`${logo_url}`}
-                    loader={hackathonlogoLoader}
-                        width={60} 
-                        height={50} alt="logo_img"
-                        className="border rounded-md"
-                    />
-                    <p className="flex font-bold">{status}</p>
-                </div>
-                <div>
-                    <h1 className="text-lg font-semibold">{name}</h1>
-                    <p className="text-sm">{organisateur}</p>
-                </div>
+            <div>
+            <Image src={`${logo_url}`}
+                loader={hackathonlogoLoader}
+                width={130} 
+                height={100} alt="logo_img"
+                className="border rounded-md max-sm:hidden"
+                />
             </div>
-            <div className="flex justify-between text-xs items-center">
+            <div className="flex flex-col gap-3">
+                <p> {date_debut} </p>
+                <h1> {name} </h1>
                 <div className="flex items-center text-xs">
-                    <ImgCollpsed />
+                   <ImgCollpsed />
+                   <span>+20participants</span>
                 </div>
             </div>
         </div>

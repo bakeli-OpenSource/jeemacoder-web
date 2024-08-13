@@ -19,11 +19,18 @@ const profil = {
     firstname : "KalyDiallo"
 }
 export default function Page() {
+    const timestamp = Date.now()
+    const date = new Date(timestamp)
+    const nowdate = `${date.getDate()}-0${date.getMonth()}-${date.getFullYear()}`
+    const nowDate = JSON.stringify(nowdate)
     const [value , setValue] = useState<Hackathon>({
-        name : '', date_debut : '2024-07-02' , heure_debut : "08:00" , heure_fin : "20h:00",
-        date_fin : '2024-07-02', date_limite : '2024-07-02', slogan : '' , lieu : '', prix : '',
+        name : '', date_debut : nowDate , heure_debut : "08:00" , heure_fin : "20:00",
+        date_fin : nowDate, date_limite : '2024-07-02', slogan : '' , lieu : '', prix : '',
         structure_organisateur : '',logo_url:'',theme:'',description:''
     })
+    console.log(nowDate , typeof(nowDate));
+    
+
     const [description , setDescription] = useState('une descrpton de votre hackathon expicative une descrpton de votre hackathon expicativeune descrpton de votre hackathon expicativeune descrpton de votre hackathon expicativeune descrpton de votre hackathon expicative une descrpton de votre hackathon expicative')
     const [theme , setTheme] = useState('vert')
     const [logo_url , setLogo_Url] = useState<File | null>()
