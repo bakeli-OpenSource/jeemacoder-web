@@ -84,7 +84,7 @@ export default function Page() {
 
     return (
         <div className="">
-            <div className="max-w-4xl m-auto my-1 p-10 rounded-md">
+            <div className="max-w-4xl m-auto my-1 p-10 rounded-md border">
                <div className="">
                     <div onClick={onCloseModal} className="border cursor-pointer flex items-center gap-2 max-w-32 py-1 rounded-md justify-center" >
                         <Undo2 className="stroke-1 size-3"/> <span>Retour</span>
@@ -233,7 +233,7 @@ const Input = ({id , type = "text", value, placeholder, className, label , requi
 }) => {
     return (
         <div className="flex flex-col w-full gap-2 ">
-            <label className="translate-x-3 text-sm text-[#F47E11] "> {label} </label>
+            <label className="translate-x-3 text-sm "> {label} </label>
     <input type={type} id={id} value={value} required={required} placeholder={placeholder} onChange={onChange}
                 className={clsx( 'outline-none px-3 py-2 text-dark rounded-md max-w-sm text-xs bg-transparent border bg-transparant focus:border-[#F47E11]' , 
                     {className})}
