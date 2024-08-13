@@ -14,7 +14,7 @@ const links: Links[] = [
 const sideBarLink: Links[] = [
   { href: "/espaceParticipant", link: "Détails" },
   { href: "/espaceParticipant/tableau", link: "Tableaux" },
-  { href: "/espaceParticipant", link: "Ressources" },
+  { href: "/espaceParticipant/Ressource", link: "Ressources" },
   { href: "/espaceParticipant/Chat", link: "Chat" },
 ];
 
