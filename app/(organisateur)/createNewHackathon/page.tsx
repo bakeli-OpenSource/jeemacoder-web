@@ -47,7 +47,7 @@ export default function Page() {
     
     const mutation = useMutation({
         mutationFn: async (formData: FormData) => {
-            const response = await fetch('http://localhost:8000/api/hackathons/create', {
+            const response = await fetch('https://api.jeemacoder.fewnu.app/api/hackathons/create', {
                 method: 'POST',
                 headers: {
                     "Authorization": `Bearer ${authToken}`
