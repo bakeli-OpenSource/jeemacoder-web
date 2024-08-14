@@ -1,30 +1,8 @@
 import { Cross1Icon, CheckIcon, EyeOpenIcon, SlashIcon } from "@radix-ui/react-icons";
 import { useState, useEffect } from "react";
 import { getParticipants } from "@/app/utils/api/data"; // Assurez-vous que ce chemin est correct
-import { Individuel, Equipe } from '@/app/utils/definitions'; // Assurez-vous que ce chemin est correct
+import { Individuel, Equipe, Participant } from '@/app/utils/definitions'; // Assurez-vous que ce chemin est correct
 import Image from "next/image";
-
-interface Participant {
-    id: number;
-    type: 'Solo' | 'Équipe';
-    user?: {
-        id: number;
-        firstname: string;
-        lastname: string;
-        pays: string;
-        ville: string;
-        email: string;
-        metier: string;
-        role: string;
-        photo: string | null;
-        created_at: string;
-        updated_at: string;
-    } | null;
-    motivation?: string;
-    status: 'attente' | 'accepté' | 'refusé';
-    created_at: string;
-    updated_at: string;
-}
 
 interface Props {
     hackathonId: string;
@@ -45,8 +23,8 @@ export const GestionParticipants: React.FC<Props> = ({ hackathonId }) => {
                     const combinedParticipants: Participant[] = [
                         ...response.Individuels.map(participant => ({
                             id: participant.id,
-                            type: 'Solo',
-                            user: participant.user,
+                            type: 'Solo' as 'Solo',
+                            user: participant.user || null,
                             motivation: participant.motivation || '',
                             status: participant.status,
                             created_at: participant.created_at,
@@ -54,9 +32,9 @@ export const GestionParticipants: React.FC<Props> = ({ hackathonId }) => {
                         })),
                         ...response.Equipes.map(participant => ({
                             id: participant.id,
-                            type: 'Équipe',
-                            user: null,
-                            motivation: participant.motivation,
+                            type: 'Équipe' as 'Équipe',
+                            user: participant.user || null,
+                            motivation: participant.motivation || '',
                             status: participant.status,
                             created_at: participant.created_at,
                             updated_at: participant.updated_at
@@ -82,11 +60,11 @@ export const GestionParticipants: React.FC<Props> = ({ hackathonId }) => {
         currentPage * itemsPerPage
     );
 
-    const handleDetails = (id: number) => {
+    const handleDetails = (id: string) => {
         console.log(`Showing details for participant ${id}`);
     };
 
-    const handleBan = (id: number) => {
+    const handleBan = (id: string) => {
         console.log(`Banning participant ${id}`);
     };
 

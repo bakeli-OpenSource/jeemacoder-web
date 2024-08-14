@@ -1,18 +1,15 @@
 import { Cross1Icon, CheckIcon } from "@radix-ui/react-icons";
 import { useState, useEffect } from "react";
 import { getParticipants, approveParticipant, rejectParticipant, approveParticipantEquipe, rejectParticipantEquipe, createWorkspace } from "@/app/utils/api/data";
-import { Individuel, Equipe, ParticipantsResponse } from '@/app/utils/definitions';
+import { Individuel, Equipe, ParticipantsResponse, Participant } from '@/app/utils/definitions';
 import Image from "next/image";
 
-interface Participant extends Individuel, Equipe {
-    type: 'Solo' | 'Équipe';
-}
 interface Props {
     hackathonId: string;
 }
 
 export const EnrolementParticipants: React.FC<Props> = ({ hackathonId }) => {
-    const [participants, setParticipants] = useState<(Individuel | Equipe)[]>([]);
+    const [participants, setParticipants] = useState<Participant[]>([]);
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 8;
 
@@ -24,9 +21,49 @@ export const EnrolementParticipants: React.FC<Props> = ({ hackathonId }) => {
 
                 if (response.success) {
                     // Combine both Individuels and Equipes into a single array
-                    const combinedParticipants = [
-                        ...response.Individuels.map(participant => ({ ...participant, type: 'Solo' })),
-                        ...response.Equipes.map(participant => ({ ...participant, type: 'Équipe' }))
+                    const combinedParticipants: Participant[] = [
+                        ...response.Individuels.map(participant => ({
+                            id: participant.id,
+                            type: 'Solo' as 'Solo',
+                            user: participant.user ? {
+                                id: participant.user.id || '', // Valeur par défaut pour `id`
+                                firstname: participant.user.firstname || 'N/A',
+                                lastname: participant.user.lastname || 'N/A',
+                                pays: participant.user.pays || 'N/A',
+                                ville: participant.user.ville || 'N/A',
+                                email: participant.user.email || 'N/A',
+                                metier: participant.user.metier || 'N/A',
+                                role: participant.user.role || 'N/A',
+                                photo: participant.user.photo || '/default-avatar.png',
+                                created_at: participant.user.created_at || '', // Valeur par défaut pour `created_at`
+                                updated_at: participant.user.updated_at || ''  // Valeur par défaut pour `updated_at`
+                            } : null,
+                            motivation: participant.motivation || 'Aucune',
+                            status: participant.status,
+                            created_at: participant.created_at,
+                            updated_at: participant.updated_at
+                        })),
+                        ...response.Equipes.map(participant => ({
+                            id: participant.id,
+                            type: 'Équipe' as 'Équipe',
+                            user: participant.user ? {
+                                id: participant.user.id || '', // Valeur par défaut pour `id`
+                                firstname: participant.user.firstname || 'N/A',
+                                lastname: participant.user.lastname || 'N/A',
+                                pays: participant.user.pays || 'N/A',
+                                ville: participant.user.ville || 'N/A',
+                                email: participant.user.email || 'N/A',
+                                metier: participant.user.metier || 'N/A',
+                                role: participant.user.role || 'N/A',
+                                photo: participant.user.photo || '/default-avatar.png',
+                                created_at: participant.user.created_at || '', // Valeur par défaut pour `created_at`
+                                updated_at: participant.user.updated_at || ''  // Valeur par défaut pour `updated_at`
+                            } : null,
+                            motivation: participant.motivation || 'Aucune',
+                            status: participant.status,
+                            created_at: participant.created_at,
+                            updated_at: participant.updated_at
+                        }))
                     ];
                     setParticipants(combinedParticipants);
                 } else {
@@ -40,7 +77,7 @@ export const EnrolementParticipants: React.FC<Props> = ({ hackathonId }) => {
         fetchParticipants();
     }, [hackathonId]);
 
-    const handleStatusUpdate = async (id: string, status: 'accepté' | 'refusé', name: string, type: string) => {
+    const handleStatusUpdate = async (id: string, status: 'accepté' | 'refusé', name: string, type: 'Solo' | 'Équipe') => {
         try {
             if (status === 'accepté') {
                 if (type === 'Solo') {
@@ -109,7 +146,7 @@ export const EnrolementParticipants: React.FC<Props> = ({ hackathonId }) => {
                                 </td>
                                 <td className="py-2 px-4 border-b border-gray-200">{participant.user?.firstname || 'N/A'}</td>
                                 <td className="py-2 px-4 border-b border-gray-200">{participant.user?.lastname || 'N/A'}</td>
-                                <td className="py-2 px-4 border-b border-gray-200">{participant.motivation || 'N/A'}</td>
+                                <td className="py-2 px-4 border-b border-gray-200">{participant.motivation || 'Aucune'}</td>
                                 <td className="py-2 px-4 border-b border-gray-200">
                                     <div className="flex space-x-2">
                                         <button

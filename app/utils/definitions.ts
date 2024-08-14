@@ -62,3 +62,13 @@ export type ParticipantsResponse = {
     Individuels: Individuel[];
     Equipes:Equipe[];
   };
+
+  export type Participant = {
+    id: string;
+    type: 'Solo' | 'Équipe';
+    user?:User | null;
+    motivation?: string;
+    status: 'attente' | 'accepté' | 'refusé';
+    created_at: string;
+    updated_at: string;
+}
