@@ -13,7 +13,7 @@ export const getUserHackathon = async (Hackathon_id : string) => {
         }
     };
     try {
-        const response = await fetch(`http://localhost:8000/api/hackathon/recup/${Hackathon_id}`, options);
+        const response = await fetch(`https://api.jeemacoder.fewnu.app/api/hackathon/recup/${Hackathon_id}`, options);
         if (!response.ok) {
             throw new Error(`HTTP error! Status: ${response.status}`);
         }
@@ -35,7 +35,7 @@ export const getUserIndividuel = async (Individuel_id : string) => {
         }
     };
     try {
-        const response = await fetch(`http://localhost:8000/api/hackathon/recup/by_user_id/${Individuel_id}`, options);
+        const response = await fetch(`https://api.jeemacoder.fewnu.app/api/hackathon/recup/by_user_id/${Individuel_id}`, options);
         if (!response.ok) {
             throw new Error(`HTTP error! Status: ${response.status}`);
         }
@@ -57,7 +57,7 @@ export const sendMessage = async (Workspace_id : string) => {
         }
     };
     try {
-        const response = await fetch(`http://localhost:8000/api/sendMessage_in/${Workspace_id}`, options);
+        const response = await fetch(`https://api.jeemacoder.fewnu.app/api/sendMessage_in/${Workspace_id}`, options);
         if (!response.ok) {
             throw new Error(`HTTP error! Status: ${response.status}`);
         }
@@ -79,7 +79,7 @@ export const getAllMessageByWorkspaceId = async (Workspace_id : string) => {
         }
     };
     try {
-        const response = await fetch(`http://localhost:8000/api/all_messages/${Workspace_id}`, options);
+        const response = await fetch(`https://api.jeemacoder.fewnu.app/api/all_messages/${Workspace_id}`, options);
         if (!response.ok) {
             throw new Error(`HTTP error! Status: ${response.status}`);
         }
