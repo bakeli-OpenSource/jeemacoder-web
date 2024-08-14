@@ -1,15 +1,15 @@
 import { Cross1Icon, CheckIcon, EyeOpenIcon, SlashIcon } from "@radix-ui/react-icons";
 import { useState, useEffect } from "react";
 import { getParticipants } from "@/app/utils/api/data"; // Assurez-vous que ce chemin est correct
-import { Individuel } from '@/app/utils/definitions'; // Assurez-vous que ce chemin est correct
+import { Individuel, Equipe, Participant } from '@/app/utils/definitions'; // Assurez-vous que ce chemin est correct
 import Image from "next/image";
 
 interface Props {
     hackathonId: string;
 }
 
-export const GestionParticipants: React.FC<Props> = ({ hackathonId } : {hackathonId : string}) => {
-    const [participants, setParticipants] = useState<Individuel[]>([]);
+export const GestionParticipants: React.FC<Props> = ({ hackathonId }) => {
+    const [participants, setParticipants] = useState<Participant[]>([]);
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 8;
 
@@ -19,11 +19,31 @@ export const GestionParticipants: React.FC<Props> = ({ hackathonId } : {hackatho
                 const response = await getParticipants(hackathonId);
                 console.log("Data received from API:", response);
 
-                // Assurez-vous que la clé `Individuels` est correcte
-                if (response.success && Array.isArray(response.Individuels)) {
-                    setParticipants(response.Individuels.filter(participant => participant.status === 'accepté'));
+                if (response.success) {
+                    const combinedParticipants: Participant[] = [
+                        ...response.Individuels.map(participant => ({
+                            id: participant.id,
+                            type: 'Solo' as 'Solo',
+                            user: participant.user || null,
+                            motivation: participant.motivation || '',
+                            status: participant.status,
+                            created_at: participant.created_at,
+                            updated_at: participant.updated_at
+                        })),
+                        ...response.Equipes.map(participant => ({
+                            id: participant.id,
+                            type: 'Équipe' as 'Équipe',
+                            user: participant.user || null,
+                            motivation: participant.motivation || '',
+                            status: participant.status,
+                            created_at: participant.created_at,
+                            updated_at: participant.updated_at
+                        }))
+                    ];
+                    // Filter by 'accepté' status
+                    setParticipants(combinedParticipants.filter(participant => participant.status === 'accepté'));
                 } else {
-                    console.error("Expected an array of participants under 'Individuels', but got:", response);
+                    console.error("Unexpected response format:", response);
                 }
             } catch (error) {
                 console.error("Error fetching participants:", error);
@@ -55,7 +75,8 @@ export const GestionParticipants: React.FC<Props> = ({ hackathonId } : {hackatho
                 <table className="min-w-full bg-white">
                     <thead>
                         <tr>
-                        <th className="py-2 px-4 border-b-2 border-gray-300 text-left">Photo</th>
+                            <th className="py-2 px-4 border-b-2 border-gray-300 text-left">Type</th>
+                            <th className="py-2 px-4 border-b-2 border-gray-300 text-left">Photo</th>
                             <th className="py-2 px-4 border-b-2 border-gray-300 text-left">Nom</th>
                             <th className="py-2 px-4 border-b-2 border-gray-300 text-left">Prénom</th>
                             <th className="py-2 px-4 border-b-2 border-gray-300 text-left">Motivation</th>
@@ -65,16 +86,17 @@ export const GestionParticipants: React.FC<Props> = ({ hackathonId } : {hackatho
                     <tbody>
                         {currentParticipants.map((participant) => (
                             <tr key={participant.id}>
-                                 <td className="py-2 px-4 border-b border-gray-200">
+                                <td className="py-2 px-4 border-b border-gray-200">{participant.type}</td>
+                                <td className="py-2 px-4 border-b border-gray-200">
                                     <Image
-                                        src={participant.user.photo || '/default-avatar.png'} // Utilisez une image par défaut si photo est null
-                                        alt={`${participant.user.firstname} ${participant.user.lastname}`}
+                                        src={participant.user?.photo || '/default-avatar.png'} // Utilisez une image par défaut si photo est null
+                                        alt={`${participant.user?.firstname || 'N/A'} ${participant.user?.lastname || 'N/A'}`}
                                         className="w-12 h-12 rounded-full"
                                         width={100} height={100}
                                     />
                                 </td>
-                                <td className="py-2 px-4 border-b border-gray-200">{participant.user.firstname}</td>
-                                <td className="py-2 px-4 border-b border-gray-200">{participant.user.lastname}</td>
+                                <td className="py-2 px-4 border-b border-gray-200">{participant.user?.firstname || 'N/A'}</td>
+                                <td className="py-2 px-4 border-b border-gray-200">{participant.user?.lastname || 'N/A'}</td>
                                 <td className="py-2 px-4 border-b border-gray-200">{participant.motivation || 'N/A'}</td>
                                 <td className="py-2 px-4 border-b border-gray-200">
                                     <div className="flex space-x-2">
