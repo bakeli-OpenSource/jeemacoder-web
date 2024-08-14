@@ -39,7 +39,7 @@ export default function Page() {
     };
 
     try {
-      const res = await axios.post('http://localhost:8000/api/login', formData, {
+      const res = await axios.post('https://api.jeemacoder.fewnu.app/api/login', formData, {
         headers: {
           "Content-Type": "application/json",
         },

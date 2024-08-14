@@ -62,7 +62,7 @@ const Form = () => {
     formData.append("role", role!);
 
     axios
-      .post("http://localhost:8000/api/register", formData, {
+      .post("https://api.jeemacoder.fewnu.app/api/register", formData, {
         headers: {
           "Content-Type": "application/json",
         },

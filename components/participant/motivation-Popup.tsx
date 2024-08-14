@@ -20,7 +20,7 @@ if (typeof window !== "undefined") {
       const router = useRouter()
 const mutation = useMutation({
     mutationFn : async (formData : BodyInit) => {
-        return await fetch( !equipeDeja ? 'http://localhost:8000/api/indiv/create' : "http://localhost:8000/api/equipe/create" , {
+        return await fetch( !equipeDeja ? 'https://api.jeemacoder.fewnu.app/api/indiv/create' : "https://api.jeemacoder.fewnu.app/api/equipe/create" , {
             method : 'POST',
             headers : {
                 "Contente-type" : "Application/json",
@@ -38,7 +38,7 @@ const mutation = useMutation({
 })
 const mutationMenbreEquipe = useMutation({
     mutationFn : async (formData : BodyInit) => {
-        return await fetch("http://localhost:8000/api/membre/add" , {
+        return await fetch("https://api.jeemacoder.fewnu.app/api/membre/add" , {
             method : 'POST',
             headers : {
                 "Contente-type" : "Application/json",

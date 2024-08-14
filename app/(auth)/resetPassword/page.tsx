@@ -27,7 +27,7 @@ export default function RequestResetPasswordPage() {
     setSuccess(null);
 
     try {
-      const res = await axios.post('http://localhost:8000/api/forget/email', { email: value.email }, {
+      const res = await axios.post('https://api.jeemacoder.fewnu.app/api/forget/email', { email: value.email }, {
         headers: {
           "Content-Type": "application/json",
         },

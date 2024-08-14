@@ -12,7 +12,7 @@ export const getUser = async () => {
                     "Authorization" : `Bearer ${authToken}`
                 }
             }
-        const response = fetch('http://localhost:8000/api/user' , options)
+        const response = fetch('https://api.jeemacoder.fewnu.app/api/user' , options)
             .then(response => response.json())
             .catch(err => console.log("failed fecthing user",err))
 

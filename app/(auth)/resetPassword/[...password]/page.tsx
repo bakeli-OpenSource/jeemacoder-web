@@ -53,7 +53,7 @@ const ResetPasswordPage = () => {
     console.log('Formdata : ', formData);
 
     try {
-      const res = await axios.post('http://localhost:8000/api/password/reset', formData, {
+      const res = await axios.post('https://api.jeemacoder.fewnu.app/api/password/reset', formData, {
         headers: {
           "Content-Type": "application/json",
         },
