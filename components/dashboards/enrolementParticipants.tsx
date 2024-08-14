@@ -1,29 +1,36 @@
 import { Cross1Icon, CheckIcon } from "@radix-ui/react-icons";
 import { useState, useEffect } from "react";
-import { getParticipants, approveParticipant, rejectParticipant } from "@/app/utils/api/data";
-import { Individuel, ParticipantsResponse } from '@/app/utils/definitions'; // Assurez-vous que ce chemin est correct
+import { getParticipants, approveParticipant, rejectParticipant, approveParticipantEquipe, rejectParticipantEquipe, createWorkspace } from "@/app/utils/api/data";
+import { Individuel, Equipe, ParticipantsResponse } from '@/app/utils/definitions';
 import Image from "next/image";
 
+interface Participant extends Individuel, Equipe {
+    type: 'Solo' | 'Équipe';
+}
 interface Props {
     hackathonId: string;
 }
 
 export const EnrolementParticipants: React.FC<Props> = ({ hackathonId }) => {
-    const [participants, setParticipants] = useState<Individuel[]>([]);
+    const [participants, setParticipants] = useState<(Individuel | Equipe)[]>([]);
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 8;
 
     useEffect(() => {
         const fetchParticipants = async () => {
             try {
-                // Assurez-vous que la réponse est de type ParticipantsResponse
                 const response: ParticipantsResponse = await getParticipants(hackathonId);
                 console.log("Data received from API:", response);
-                
-                if (response.success && Array.isArray(response.Individuels)) {
-                    setParticipants(response.Individuels);
+
+                if (response.success) {
+                    // Combine both Individuels and Equipes into a single array
+                    const combinedParticipants = [
+                        ...response.Individuels.map(participant => ({ ...participant, type: 'Solo' })),
+                        ...response.Equipes.map(participant => ({ ...participant, type: 'Équipe' }))
+                    ];
+                    setParticipants(combinedParticipants);
                 } else {
-                    console.error("Expected an array of participants under 'Individuels', but got:", response);
+                    console.error("Unexpected response format:", response);
                 }
             } catch (error) {
                 console.error("Error fetching participants:", error);
@@ -33,12 +40,26 @@ export const EnrolementParticipants: React.FC<Props> = ({ hackathonId }) => {
         fetchParticipants();
     }, [hackathonId]);
 
-    const handleStatusUpdate = async (id: string, status: 'accepté' | 'refusé') => {
+    const handleStatusUpdate = async (id: string, status: 'accepté' | 'refusé', name: string, type: string) => {
         try {
             if (status === 'accepté') {
-                await approveParticipant(id);
+                if (type === 'Solo') {
+                    await approveParticipant(id);
+                    console.log('Name : ', name);
+                    console.log('typeEspace : ', type);
+                    console.log('Participant ID : ', id);
+                    await createWorkspace(name, 'individuel', id);
+                } else if (type === 'Équipe') {
+                    await approveParticipantEquipe(id);
+                    console.log('Participant ID : ', id);
+                    await createWorkspace('cgfg', 'equipe', id);
+                }
             } else {
-                await rejectParticipant(id);
+                if (type === 'Solo') {
+                    await rejectParticipant(id);
+                } else if (type === 'Équipe') {
+                    await rejectParticipantEquipe(id);
+                }
             }
             setParticipants((prevParticipants) =>
                 prevParticipants.map((participant) =>
@@ -50,7 +71,6 @@ export const EnrolementParticipants: React.FC<Props> = ({ hackathonId }) => {
         }
     };
 
-    // Filtrer les participants en attente
     const waitingParticipants = participants.filter(participant => participant.status === 'attente');
 
     const totalPages = Math.ceil(waitingParticipants.length / itemsPerPage);
@@ -66,6 +86,7 @@ export const EnrolementParticipants: React.FC<Props> = ({ hackathonId }) => {
                 <table className="min-w-full bg-white">
                     <thead>
                         <tr>
+                            <th className="py-2 px-4 border-b-2 border-gray-300 text-left">Type</th>
                             <th className="py-2 px-4 border-b-2 border-gray-300 text-left">Photo</th>
                             <th className="py-2 px-4 border-b-2 border-gray-300 text-left">Nom</th>
                             <th className="py-2 px-4 border-b-2 border-gray-300 text-left">Prénom</th>
@@ -76,30 +97,32 @@ export const EnrolementParticipants: React.FC<Props> = ({ hackathonId }) => {
                     <tbody>
                         {currentParticipants.map((participant) => (
                             <tr key={participant.id}>
+                                <td className="py-2 px-4 border-b border-gray-200">{participant.type}</td>
                                 <td className="py-2 px-4 border-b border-gray-200">
                                     <Image
-                                        src={participant.user.photo || '/default-avatar.png'} // Utilisez une image par défaut si photo est null
-                                        alt={`${participant.user.firstname} ${participant.user.lastname}`}
+                                        src={participant.user?.photo || '/default-avatar.png'}
+                                        alt={`${participant.user?.firstname || 'N/A'} ${participant.user?.lastname || 'N/A'}`}
                                         className="w-12 h-12 rounded-full"
-                                        width={100} height={100}
+                                        width={100}
+                                        height={100}
                                     />
                                 </td>
-                                <td className="py-2 px-4 border-b border-gray-200">{participant.user.firstname}</td>
-                                <td className="py-2 px-4 border-b border-gray-200">{participant.user.lastname}</td>
+                                <td className="py-2 px-4 border-b border-gray-200">{participant.user?.firstname || 'N/A'}</td>
+                                <td className="py-2 px-4 border-b border-gray-200">{participant.user?.lastname || 'N/A'}</td>
                                 <td className="py-2 px-4 border-b border-gray-200">{participant.motivation || 'N/A'}</td>
                                 <td className="py-2 px-4 border-b border-gray-200">
                                     <div className="flex space-x-2">
                                         <button
                                             title="Reject"
                                             className="text-red-500 hover:bg-red-100 rounded p-1"
-                                            onClick={() => handleStatusUpdate(participant.id, 'refusé')}
+                                            onClick={() => handleStatusUpdate(participant.id, 'refusé', participant.user?.firstname || '', participant.type)}
                                         >
                                             <Cross1Icon />
                                         </button>
                                         <button
                                             title="Validate"
                                             className="text-green-500 hover:bg-green-100 rounded p-1"
-                                            onClick={() => handleStatusUpdate(participant.id, 'accepté')}
+                                            onClick={() => handleStatusUpdate(participant.id, 'accepté', participant.user?.firstname || '', participant.type)}
                                         >
                                             <CheckIcon />
                                         </button>

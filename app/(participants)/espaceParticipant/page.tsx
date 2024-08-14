@@ -55,10 +55,8 @@ export default function Page() {
 
     if (isLoading) {
         return <div>Loading...</div>;
-    }
-
-    if (isError || !data) {
-        return <div>Error loading data</div>;
+    }else if(isError || !data) {
+        return <div>Vous N avez pas de donnee</div>;
     }
 
     return (

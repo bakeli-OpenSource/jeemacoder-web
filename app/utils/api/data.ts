@@ -129,28 +129,61 @@ export const updateHackathon = async (id: string, updatedData: Partial<Hackathon
 };
 
 export const getParticipants = async (hackathonId: string): Promise<ParticipantsResponse> => {
-    const response = await fetch(`http://localhost:8000/api/indiv/index/${hackathonId}`, {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json',
-            "Authorization": `Bearer ${authToken}`
-        },
-    });
+    try {
+        // Requête pour récupérer les participants individuels
+        const indivResponse = await fetch(`http://localhost:8000/api/indiv/index/${hackathonId}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                "Authorization": `Bearer ${authToken}`
+            },
+        });
 
-    if (!response.ok) {
-        // Gestion des erreurs basée sur le code de statut
-        if (response.status === 404) {
-            throw new Error('Hackathon non trouvé');
-        } else if (response.status === 403) {
-            throw new Error('Accès refusé');
-        } else {
-            throw new Error('Échec de la récupération des demandes de participation');
+        if (!indivResponse.ok) {
+            if (indivResponse.status === 404) {
+                throw new Error('Hackathon non trouvé');
+            } else if (indivResponse.status === 403) {
+                throw new Error('Accès refusé');
+            } else {
+                throw new Error('Échec de la récupération des participants individuels');
+            }
         }
-    }
 
-    // Retourne les données en format JSON
-    return response.json(); // Assurez-vous que la structure de la réponse correspond à ParticipantsResponse
+        // Requête pour récupérer les équipes
+        const equipeResponse = await fetch(`http://localhost:8000/api/equipe/index/${hackathonId}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                "Authorization": `Bearer ${authToken}`
+            },
+        });
+
+        if (!equipeResponse.ok) {
+            if (equipeResponse.status === 404) {
+                throw new Error('Hackathon non trouvé');
+            } else if (equipeResponse.status === 403) {
+                throw new Error('Accès refusé');
+            } else {
+                throw new Error('Échec de la récupération des équipes');
+            }
+        }
+
+        // Convertir les réponses en JSON
+        const indivData = await indivResponse.json();
+        const equipeData = await equipeResponse.json();
+
+        // Combiner les données des deux endpoints
+        return {
+            success: true,
+            Individuels: indivData.Individuels || [],
+            Equipes: equipeData.Equipes || [],
+        };
+    } catch (error) {
+        console.error("Erreur lors de la récupération des participants:", error);
+        throw error;
+    }
 };
+
 
 export const approveParticipant = async (id: string) => {
     const response = await fetch(`http://localhost:8000/api/indiv/approuver/${id}`, {
@@ -183,4 +216,61 @@ export const rejectParticipant = async (id: string) => {
     }
 
     return response.json();
+};
+
+export const approveParticipantEquipe = async (id: string) => {
+    const response = await fetch(`http://localhost:8000/api/equipe/approuver/${id}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+            "Authorization": `Bearer ${authToken}`
+        },
+    });
+
+    if (!response.ok) {
+        throw new Error('Failed to approve participant');
+    }
+
+    return response.json();
+};
+
+export const rejectParticipantEquipe = async (id: string) => {
+    const response = await fetch(`http://localhost:8000/api/equipe/rejete/${id}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+            "Authorization": `Bearer ${authToken}`
+        },
+    });
+
+    if (!response.ok) {
+        throw new Error('Failed to reject participant');
+    }
+
+    return response.json();
+};
+
+export const createWorkspace = async (name: string, type_espace: string, equipe_id: string) => {
+    const options = {
+        method: "POST",
+        headers: {
+            "accept": "application/json",
+            "Authorization": `Bearer ${authToken}`,
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ name, type_espace, equipe_id }),
+    };
+    try {
+        const response = await fetch(`http://localhost:8000/api/workspace/add`, options);
+        if (!response.ok) {
+            const errorText = await response.text(); // Lire le texte de la réponse d'erreur
+            throw new Error(`HTTP error! Status: ${response.status}, Message: ${errorText}`);
+        }
+        const data = await response.json();
+        console.log('Workspace created:', data);
+        return data;
+    } catch (err) {
+        console.error('Erreur lors de la création de l\'espace de travail:', err);
+        throw err;
+    }
 };

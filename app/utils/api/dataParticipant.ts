@@ -47,3 +47,47 @@ export const getUserIndividuel = async (Individuel_id : string) => {
         throw err; // Rethrow the error so react-query can handle it
     }
 };
+
+export const sendMessage = async (Workspace_id : string) => {
+    const options = {
+        method: "POST",
+        headers: {
+            "accept": "application/json",
+            "Authorization": `Bearer ${authToken}`
+        }
+    };
+    try {
+        const response = await fetch(`http://localhost:8000/api/sendMessage_in/${Workspace_id}`, options);
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        const data = await response.json();
+        console.log('hackathons:', data);
+        return data;
+    } catch (err) {
+        console.error('Fetch error:', err);
+        throw err;
+    }
+};
+
+export const getAllMessageByWorkspaceId = async (Workspace_id : string) => {
+    const options = {
+        method: "POST",
+        headers: {
+            "accept": "application/json",
+            "Authorization": `Bearer ${authToken}`
+        }
+    };
+    try {
+        const response = await fetch(`http://localhost:8000/api/all_messages/${Workspace_id}`, options);
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        const data = await response.json();
+        console.log('hackathons:', data);
+        return data;
+    } catch (err) {
+        console.error('Fetch error:', err);
+        throw err;
+    }
+};

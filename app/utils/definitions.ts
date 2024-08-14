@@ -1,3 +1,5 @@
+export type Status = 'attente' | 'en attente' | 'accepté' | 'refusé';
+
 export type LinkData = {
     href : string,
     link : string,
@@ -45,8 +47,18 @@ export type Individuel = {
     created_at: string; 
     updated_at: string; 
 };
+export type Equipe = {
+    id: string;
+    user: User; 
+    hackathon_id: string; 
+    motivation: string; 
+    status: 'attente' | 'accepté' | 'refusé'; 
+    created_at: string; 
+    updated_at: string; 
+};
 
 export type ParticipantsResponse = {
     success: boolean;
     Individuels: Individuel[];
+    Equipes:Equipe[];
   };
