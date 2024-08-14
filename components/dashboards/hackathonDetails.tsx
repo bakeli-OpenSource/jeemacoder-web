@@ -219,7 +219,14 @@ export const HackathonDetails: React.FC<Props> = ({ hackathonId }) => {
                 </Button>
             </form>
                 <Tags hackathonId={hackathonId} />
-            
+                <div>
+                    <span className="text-xs"> Mise en place des Regles </span>
+                    <div>
+                        <ul className="list-disc text-xs">
+                            <li> Les delais de livraons sont impardonable </li>
+                        </ul>
+                    </div>
+                </div>
         </div>
     );
 };

@@ -5,6 +5,11 @@ import clsx from "clsx"
 import { useRouter } from "next/navigation"
 import {ErrorBoundary} from 'react-error-boundary'
 import hackathonlogoLoader from "@/app/utils/hackathonlogoLoader"
+import { Mutation, useQuery } from "@tanstack/react-query"
+import { getTags } from "@/app/utils/api/data"
+import { ListItem } from "../regular_list"
+
+
 
     export const HackathonCard = ({hackathons , onClick , } : {hackathons : {
     logo_url : string , 
@@ -21,9 +26,14 @@ import hackathonlogoLoader from "@/app/utils/hackathonlogoLoader"
     onClick : () => void
 }) => {
     
-
     const {logo_url , date_debut , name , structure_organisateur , 
-            status , prix , theme , id} = hackathons
+        status , prix , theme , id} = hackathons
+
+    const {data , isLoading , isError} = useQuery({
+        queryFn : async () => await getTags(id),
+        queryKey : ["tags" , id]
+    })
+    console.log(data)
         
     const router = useRouter()
     return (
@@ -32,20 +42,15 @@ import hackathonlogoLoader from "@/app/utils/hackathonlogoLoader"
             "border-dark" : theme == "neutre",
             "border-orange " : theme == "orange"
         })}>
-            {/* <div className="w-2 hover:w-4 bg-dark"></div> */}
         <div onClick={() => router.push(`listhackathons/details/${id}?name=${name}`)}
             className={clsx(" p-7 flex flex-col gap-7 " )}>
             <div className="flex gap-10 ">
                 <div className="flex flex-col gap-5">
-                {/* <ErrorBoundary fallback={
-                    <div className="w-40 h-32 border"> error </div>
-                }> */}
                 <Image src={`${logo_url}`} loader={hackathonlogoLoader}
                     width={130} 
                     height={100} 
                     alt="hack logo" 
                     className="border rounded-md"/>
-                    {/* </ErrorBoundary> */}
                 <div className="gap-4">
                     <div> <ImgCollpsed /> </div>
                     <div className="font-semibold text-sm">+{100}participants</div>
@@ -70,11 +75,16 @@ import hackathonlogoLoader from "@/app/utils/hackathonlogoLoader"
                     <DetailsCardItem icon={ SmilePlus } text={status} />
                     <div>
                         <TagsIcon className="stroke-1"/>
-                        <div className="grid grid-cols-2 gap-2">
-                        <TagElement text="Web devellopement" theme={theme} />
-                        <TagElement text=" creativity " theme={theme} />
-                        <TagElement text="React / laravel" theme={theme} />
-                    </div>
+                        {/* <div className="grid grid-cols-2 gap-2">
+                        {isLoading && <p>Chargement...</p>}
+                        {!isLoading && !isError && data && (
+                        <ListItem
+                        items={data}
+                        resourcename="tag"
+                        component={TagElement}
+                        className="flex"
+                        /> )}
+                    </div> */}
             </div>
                 </div>
             </div>
@@ -84,6 +94,7 @@ import hackathonlogoLoader from "@/app/utils/hackathonlogoLoader"
     </div>
     )
 }
+
 
 const DetailsCardItem = ({icon : Icon , text , amount , className , theme } : {
     icon : React.ElementType , text ?: string , amount ?: string | number, className ?: string , theme ?: string
@@ -98,12 +109,13 @@ const DetailsCardItem = ({icon : Icon , text , amount , className , theme } : {
 }
 
 
-export const TagElement = ({text , theme} : {text : string ,  theme : string}) => {
+export const TagElement = ({tags} : {tags : {theme : string , name : string}} ) => {
+    const {name , theme} = tags
     return (
-        <span className={clsx(" rounded-full px-4 py-1 text-xs text-dark flex-item-center" , {
-            "bg-light-orange" : theme == "orange",
-            "bg-light-green" : theme == "vert" ,
-            "bg-muted" : theme === "neutre"
-        })}>{text}</span>
+        <span className={clsx(" rounded-full px-4 py-1 text-xs text-dark flex-item-center bg-muted" , {
+            // "bg-light-orange" : theme == "orange",
+            // "bg-light-green" : theme == "vert" ,
+            // "bg-muted" : theme === "neutre"
+        })}>{name}</span>
     )
 }
